@@ -360,23 +360,7 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     overflow: hidden;
   }
   
-  .nav-links::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20" fill="rgba(255,255,255,0.1)">🐾</text></svg>') repeat;
-    background-size: 60px 60px;
-    animation: floatPaws 20s linear infinite;
-    pointer-events: none;
-  }
-  
-  @keyframes floatPaws {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-60px) rotate(360deg); }
-  }
+
   
   .nav-links.active {
     right: 0;
@@ -388,13 +372,21 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .nav-btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    width: 200px;
+    padding: 20px 40px;
+    font-size: 20px;
+    width: 90vw;
+    max-width: 350px;
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-weight: 600;
+    margin: 8px 0;
   }
   
   .nav-btn:hover {
@@ -445,8 +437,25 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .nav-link {
-    padding: 8px 16px;
-    font-size: 18px;
+    padding: 20px 24px;
+    font-size: 26px;
+    font-weight: 600;
+    min-height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.4);
   }
   
   .nav-brand {
@@ -465,7 +474,7 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   
   .hero {
     min-height: 40vh !important;
-    padding: 140px 20px 60px !important;
+    padding: 60px 20px 60px !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -473,18 +482,14 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     text-align: center !important;
   }
   
-  .hero h1 {
-    margin-bottom: 20px !important;
-  }
+
   
   .hero p {
     margin-bottom: 30px !important;
     max-width: 600px !important;
   }
   
-  .hero .badges {
-    margin-top: 30px !important;
-  }
+
   
   .hero h1 {
     font-size: 32px;
@@ -551,11 +556,16 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     position: relative;
   }
   
+  /* Show dots on mobile, hide arrows */
   .scrapbook-dots {
     display: flex !important;
     justify-content: center !important;
     gap: 8px !important;
     margin-top: 20px !important;
+  }
+  
+  .scrapbook-arrow {
+    display: none !important;
   }
   
   .scrapbook-dot {
@@ -609,11 +619,9 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   
   #testimonial-container {
     max-width: 100% !important;
-    height: 600px !important;
   }
   
   #testimonial-bubble {
-    height: 500px !important;
     width: 100% !important;
     max-width: 350px !important;
     padding: 25px !important;
@@ -640,8 +648,11 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .nav-link {
-    padding: 6px 10px;
-    font-size: 13px;
+    padding: 20px 40px;
+    font-size: 20px;
+    width: 90vw;
+    max-width: 350px;
+    min-height: 60px;
   }
   
   .nav-brand {
@@ -653,8 +664,11 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .nav-btn {
-    padding: 6px 10px;
-    font-size: 11px;
+    padding: 20px 40px;
+    font-size: 20px;
+    width: 90vw;
+    max-width: 350px;
+    min-height: 60px;
   }
 }
 
@@ -668,7 +682,11 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .hero p {
-    font-size: 20px;
+    font-size: 13px !important;
+  }
+  
+  .badges {
+    margin: 0 !important;
   }
   
   .btn {
@@ -701,6 +719,18 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   .scrapbook-img {
     height: 240px;
   }
+  
+  /* Hide scrapbook navigation on desktop */
+.scrapbook-navigation {
+  display: none !important;
+}
+
+/* Hide cursor logo on mobile devices */
+@media (max-width: 1024px) {
+  .logo {
+    display: none !important;
+  }
+}
   
   .grid[style*="repeat(4, 1fr)"] {
     display: flex !important;
@@ -1120,7 +1150,7 @@ body{
   to { opacity: 1; transform: translateY(0); }
 }
 
-.hero{min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:100px 20px 40px 20px; position:relative}
+.hero{min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:60px 20px 60px 20px; position:relative}
 .lead{font-size:clamp(16px,2.5vw,20px); margin:15px 0 15px 0; animation:fadeInUp 1s ease-out 0.2s both; max-width: 600px; line-height: 1.4}
 .badges{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0 15px 0; animation:fadeInUp 1s ease-out 0.4s both}
 .badge{background:#fff; border-radius:999px; padding:8px 14px; box-shadow:0 4px 0 rgba(0,0,0,.12); transition:all 0.3s ease}
@@ -1163,6 +1193,11 @@ body{
 .polaroid:hover .tape.r{transform:rotate(8deg) scale(1.1)}
 
 .scrapbook{display:grid; gap:20px; grid-template-columns:repeat(3,1fr)}
+
+/* Hide scrapbook navigation on desktop */
+.scrapbook-navigation {
+  display: none;
+}
 @media(max-width:879px){
   .scrapbook{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:16px; padding-bottom:8px}
   .polaroid{min-width:76%; scroll-snap-align:center}
@@ -1248,17 +1283,17 @@ body{
   }
   15% { 
     transform: translateY(15px) scale(0.8) rotate(2deg); 
-    opacity: 0.4; 
+    opacity: 0.15; 
     filter: blur(0.8px);
   }
   50% { 
     transform: translateY(-10px) scale(1) rotate(-1deg); 
-    opacity: 0.6; 
+    opacity: 0.25; 
     filter: blur(0.5px);
   }
   85% { 
     transform: translateY(-40px) scale(1.2) rotate(3deg); 
-    opacity: 0.5; 
+    opacity: 0.2; 
     filter: blur(0.7px);
   }
   100% { 
@@ -1572,55 +1607,72 @@ footer::before {
     <h2>Our Little Scrapbook</h2>
     <div class="scrapbook-container">
       <div class="scrapbook" id="scrapbook-slider">
-        <div class="polaroid" style="--rot:-1.8deg">
-          <span class="tape"></span>
-          <img src="IMG_4754.jpg" alt="Mo loves his belly rubs" class="scrapbook-img">
-          <div class="cap">Mo 🐾</div>
-          <div class="sub">Loves his belly rubs!</div>
-        </div>
-        <div class="polaroid" style="--rot:2deg">
-          <span class="tape r"></span>
-          <img src="rudy.webp" alt="Rudy - first walk" class="scrapbook-img">
-          <div class="cap">First walk with Rudy 🐾</div>
-          <div class="sub">My very first dog walking client.</div>
-        </div>
-        <div class="polaroid" style="--rot:-2.6deg">
-          <span class="tape"></span>
-          <img src="Screenshot 2025-08-14 024756.png" alt="Rocco tribute" class="scrapbook-img">
-          <div class="cap">Rocco — remembered with love ❤️</div>
-          <div class="sub">Honoring a sweet walking buddy.</div>
-        </div>
-        <div class="polaroid" style="--rot:1.4deg">
-          <span class="tape r"></span>
-          <img src="Screenshot 2025-08-14 024956.png" alt="Milo and Snowy" class="scrapbook-img">
-          <div class="cap">Milo &amp; Snowy 💛</div>
-          <div class="sub">Sweet furry friends.</div>
-        </div>
-        <div class="polaroid" style="--rot:-1deg">
-          <span class="tape"></span>
-          <img src="Screenshot 2025-08-14 025134.png" alt="Deedles" class="scrapbook-img">
-          <div class="cap">Deedles 🐾</div>
-          <div class="sub">Adorable and playful.</div>
-        </div>
-        <div class="polaroid" style="--rot:.8deg">
-          <span class="tape r"></span>
-          <img src="Screenshot 2025-08-14 025921.png" alt="Charlie" class="scrapbook-img">
-          <div class="cap">Charlie! What a baby 🥰</div>
-          <div class="sub">The sweetest little one.</div>
-        </div>
+      <div class="polaroid" style="--rot:-1.8deg">
+        <span class="tape"></span>
+        <img src="IMG_4754.jpg" alt="Mo loves his belly rubs" class="scrapbook-img">
+        <div class="cap">Mo 🐾</div>
+        <div class="sub">Loves his belly rubs!</div>
       </div>
-      
-      <!-- Scrapbook navigation dots -->
-      <div class="scrapbook-dots">
-        <button class="scrapbook-dot active" onclick="showScrapbookSlide(0)"></button>
-        <button class="scrapbook-dot" onclick="showScrapbookSlide(1)"></button>
-        <button class="scrapbook-dot" onclick="showScrapbookSlide(2)"></button>
-        <button class="scrapbook-dot" onclick="showScrapbookSlide(3)"></button>
-        <button class="scrapbook-dot" onclick="showScrapbookSlide(4)"></button>
-        <button class="scrapbook-dot" onclick="showScrapbookSlide(5)"></button>
+      <div class="polaroid" style="--rot:2deg">
+        <span class="tape r"></span>
+        <img src="rudy.webp" alt="Rudy - first walk" class="scrapbook-img">
+        <div class="cap">First walk with Rudy 🐾</div>
+        <div class="sub">My very first dog walking client.</div>
+      </div>
+      <div class="polaroid" style="--rot:-2.6deg">
+        <span class="tape"></span>
+        <img src="Screenshot 2025-08-14 024756.png" alt="Rocco tribute" class="scrapbook-img">
+        <div class="cap">Rocco — remembered with love ❤️</div>
+        <div class="sub">Honoring a sweet walking buddy.</div>
+      </div>
+      <div class="polaroid" style="--rot:1.4deg">
+        <span class="tape r"></span>
+        <img src="Screenshot 2025-08-14 024956.png" alt="Milo and Snowy" class="scrapbook-img">
+        <div class="cap">Milo &amp; Snowy 💛</div>
+        <div class="sub">Sweet furry friends.</div>
+      </div>
+      <div class="polaroid" style="--rot:-1deg">
+        <span class="tape"></span>
+        <img src="Screenshot 2025-08-14 025134.png" alt="Deedles" class="scrapbook-img">
+        <div class="cap">Deedles 🐾</div>
+        <div class="sub">Adorable and playful.</div>
+      </div>
+      <div class="polaroid" style="--rot:.8deg">
+        <span class="tape r"></span>
+        <img src="Screenshot 2025-08-14 025921.png" alt="Charlie" class="scrapbook-img">
+        <div class="cap">Charlie! What a baby 🥰</div>
+        <div class="sub">The sweetest little one.</div>
       </div>
     </div>
-    
+      
+      <!-- Scrapbook navigation -->
+      <div class="scrapbook-navigation">
+        <!-- Arrow buttons for desktop -->
+        <button class="scrapbook-arrow scrapbook-arrow-left" onclick="previousScrapbookSlide()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
+        </button>
+        
+        <!-- Dots for mobile only -->
+        <div class="scrapbook-dots">
+          <button class="scrapbook-dot active" onclick="showScrapbookSlide(0)"></button>
+          <button class="scrapbook-dot" onclick="showScrapbookSlide(1)"></button>
+          <button class="scrapbook-dot" onclick="showScrapbookSlide(2)"></button>
+          <button class="scrapbook-dot" onclick="showScrapbookSlide(3)"></button>
+          <button class="scrapbook-dot" onclick="showScrapbookSlide(4)"></button>
+          <button class="scrapbook-dot" onclick="showScrapbookSlide(5)"></button>
+        </div>
+        
+        <!-- Arrow buttons for desktop -->
+        <button class="scrapbook-arrow scrapbook-arrow-right" onclick="nextScrapbookSlide()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+          </svg>
+        </button>
+          </div>
+        </div>
+        
     <div style="text-align: center; margin-top: 60px;">
         <a href="https://www.instagram.com/meirapetsitting/" target="_blank" rel="noopener" class="btn instagram-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
@@ -1652,43 +1704,43 @@ footer::before {
     <h2>Services &amp; Pricing</h2>
           <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">
         <div class="service-card" style="opacity: 0; transform: translateY(30px); transition: all 0.6s ease;">
-          <div class="panel">
+      <div class="panel">
             <div class="kicker">Cats & Dogs</div>
-            <h3>Drop‑In (30 min)</h3>
+        <h3>Drop‑In (30 min)</h3>
             <p class="price"><strong>$25</strong></p>
-            <ul>
-              <li>5+ photos/videos</li>
-              <li>Food, water, litter refresh</li>
-              <li>Playtime &amp; cuddles</li>
-            </ul>
+        <ul>
+          <li>5+ photos/videos</li>
+          <li>Food, water, litter refresh</li>
+          <li>Playtime &amp; cuddles</li>
+        </ul>
             <p class="small">+$3/extra pet · +$5 meds · Holiday +$10</p>
-          </div>
+      </div>
         </div>
         <div class="service-card" style="opacity: 0; transform: translateY(30px); transition: all 0.6s ease 0.1s;">
-          <div class="panel">
+      <div class="panel">
             <div class="kicker">Cats & Dogs</div>
-            <h3>Drop‑In (60 min)</h3>
+        <h3>Drop‑In (60 min)</h3>
             <p class="price"><strong>$45</strong></p>
-            <ul>
-              <li>5+ photos/videos</li>
-              <li>Deep clean + extended play</li>
-              <li>Mail/plants/lights on request</li>
-            </ul>
+        <ul>
+          <li>5+ photos/videos</li>
+          <li>Deep clean + extended play</li>
+          <li>Mail/plants/lights on request</li>
+        </ul>
             <p class="small">+$3/extra pet · +$5 meds · Holiday +$10</p>
-          </div>
+      </div>
         </div>
         <div class="service-card" style="opacity: 0; transform: translateY(30px); transition: all 0.6s ease 0.2s;">
-          <div class="panel">
-            <div class="kicker">Dogs</div>
+      <div class="panel">
+        <div class="kicker">Dogs</div>
             <h3>Walk (30 min)</h3>
             <p class="price"><strong>$25</strong></p>
-            <ul>
-              <li>Photos + short summary</li>
+        <ul>
+          <li>Photos + short summary</li>
               <li>Strava route link</li>
-              <li>Fresh water + secure lock‑up</li>
-            </ul>
+          <li>Fresh water + secure lock‑up</li>
+        </ul>
             <p class="small">+$3/extra pet · +$5 meds · Holiday +$10</p>
-          </div>
+      </div>
         </div>
         <div class="service-card" style="opacity: 0; transform: translateY(30px); transition: all 0.6s ease 0.3s;">
           <div class="panel">
@@ -1756,7 +1808,7 @@ footer::before {
         
         <div id="testimonial-content">
           <!-- Content will be populated by JavaScript -->
-        </div>
+    </div>
       </div>
     </div>
     
@@ -1786,11 +1838,11 @@ footer::before {
         <div style="text-align: left; margin-bottom: 15px;">
           <div style="margin-bottom: 12px;">
             <span style="font-size: 16px; margin-right: 6px;">📧</span>
-            <a href="mailto:hello@meirapetsitting.com" style="color: var(--cta); font-weight: 600; font-size: 14px;">hello@meirapetsitting.com</a>
+            <a href="mailto:contact@meiratompkins.com" style="color: var(--cta); font-weight: 600; font-size: 14px;">contact@meiratompkins.com</a>
           </div>
           <div style="margin-bottom: 12px;">
             <span style="font-size: 16px; margin-right: 6px;">📱</span>
-            <a href="tel:+1YOURNUMBER" style="color: var(--cta); font-weight: 600; font-size: 14px;">+1 (XXX) XXX‑XXXX</a>
+            <a href="tel:+19788469699" style="color: var(--cta); font-weight: 600; font-size: 14px;">+1 (978) 846‑9699</a>
           </div>
           <div style="margin-bottom: 12px;">
             <span style="font-size: 16px; margin-right: 6px;">🐕</span>
@@ -1811,9 +1863,9 @@ footer::before {
         
         <div style="margin-bottom: 15px;">
           <p style="color: #666; margin-bottom: 12px; font-size: 14px;">Quick & secure payment via Venmo</p>
-          <a class="btn" href="https://venmo.com/u/YOURHANDLE" target="_blank" rel="noopener" style="background: var(--cta2); font-size: 14px; padding: 12px 24px;">
+          <a class="btn" href="https://venmo.com/u/Meira-0913" target="_blank" rel="noopener" style="background: var(--cta2); font-size: 14px; padding: 12px 24px;">
             <span style="font-size: 18px; margin-right: 6px;">💚</span>
-            Pay @YOURHANDLE
+                          Pay @Meira-0913
           </a>
         </div>
         
@@ -2292,8 +2344,19 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // Re-enable scrapbook auto-advance but without scrollIntoView
-  let currentScrapbookSlide = 0;
-  const totalScrapbookSlides = 6;
+let currentScrapbookSlide = 0;
+const totalScrapbookSlides = 6;
+
+// Scrapbook arrow navigation functions
+window.previousScrapbookSlide = function() {
+  currentScrapbookSlide = (currentScrapbookSlide - 1 + totalScrapbookSlides) % totalScrapbookSlides;
+  window.showScrapbookSlide(currentScrapbookSlide);
+};
+
+window.nextScrapbookSlide = function() {
+  currentScrapbookSlide = (currentScrapbookSlide + 1) % totalScrapbookSlides;
+  window.showScrapbookSlide(currentScrapbookSlide);
+};
   let isUserScrolling = false;
   let scrollTimeout;
   
