@@ -13,7 +13,7 @@
 <meta name="geo.placename" content="West Hartford">
 <meta name="geo.position" content="41.7628;-72.7420">
 <meta name="ICBM" content="41.7628, -72.7420">
-<!-- test -->
+
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meirapetsitting.com/">
@@ -569,13 +569,13 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   .scrapbook-dot {
-    width: 10px !important;
-    height: 10px !important;
+    width: 12px !important;
+    height: 12px !important;
     border-radius: 50% !important;
     background: var(--cta2) !important;
     border: none !important;
     cursor: pointer !important;
-    opacity: 0.3 !important;
+    opacity: 0.5 !important;
     transition: opacity 0.3s ease !important;
   }
   
@@ -721,8 +721,10 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   }
   
   /* Hide scrapbook navigation on desktop */
-.scrapbook-navigation {
-  display: none !important;
+@media (min-width: 1025px) {
+  .scrapbook-navigation {
+    display: none !important;
+  }
 }
 
 /* Hide cursor logo on mobile devices */
@@ -1195,8 +1197,10 @@ body{
 .scrapbook{display:grid; gap:20px; grid-template-columns:repeat(3,1fr)}
 
 /* Hide scrapbook navigation on desktop */
-.scrapbook-navigation {
-  display: none;
+@media (min-width: 1025px) {
+  .scrapbook-navigation {
+    display: none;
+  }
 }
 @media(max-width:879px){
   .scrapbook{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:16px; padding-bottom:8px}
@@ -2339,8 +2343,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  // Scrapbook carousel state
+let currentScrapbookSlide = 0;
+const totalScrapbookSlides = 6;
+
   // Scrapbook slider functionality
   window.showScrapbookSlide = function(index) {
+    currentScrapbookSlide = index;
     const slider = document.getElementById('scrapbook-slider');
     const dots = document.querySelectorAll('.scrapbook-dot');
     const polaroids = document.querySelectorAll('.scrapbook .polaroid');
@@ -2350,21 +2359,19 @@ document.addEventListener('DOMContentLoaded', function() {
       dot.classList.toggle('active', i === index);
     });
     
-    // Update dots only - no scrolling to prevent page jumping
+    // Scroll horizontally within the carousel only (no page jumping)
     const targetPolaroid = polaroids[index];
-    if (targetPolaroid) {
-      // Just update the dots, don't scroll
-      // targetPolaroid.scrollIntoView({
-      //   behavior: 'smooth',
-      //   block: 'nearest',
-      //   inline: 'center'
-      // });
+    if (targetPolaroid && slider) {
+      const polaroidRect = targetPolaroid.getBoundingClientRect();
+      const sliderRect = slider.getBoundingClientRect();
+      const scrollLeft = targetPolaroid.offsetLeft - (slider.offsetWidth / 2) + (targetPolaroid.offsetWidth / 2);
+      
+      slider.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+      });
     }
   };
-  
-  // Re-enable scrapbook auto-advance but without scrollIntoView
-let currentScrapbookSlide = 0;
-const totalScrapbookSlides = 6;
 
 // Scrapbook arrow navigation functions
 window.previousScrapbookSlide = function() {
@@ -2404,6 +2411,9 @@ window.nextScrapbookSlide = function() {
       isUserScrolling = false;
     }, 3000);
   });
+  
+  // Initialize scrapbook to first slide
+  window.showScrapbookSlide(0);
   
   setInterval(() => {
     if (!isUserScrolling) {
