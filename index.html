@@ -334,6 +334,54 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
+/* Testimonial Styles */
+.testimonial-container {
+  position: relative;
+}
+
+.testimonial-mobile {
+  display: none;
+}
+
+.testimonial-desktop {
+  display: block;
+}
+
+.testimonial-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+
+.testimonial-name {
+  font-weight: bold;
+  color: var(--ink);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.testimonial-service {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.testimonial-text {
+  color: var(--ink);
+  line-height: 1.5;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
 /* Responsive Design - Mobile First Approach */
 @media (max-width: 1024px) {
   .hamburger {
@@ -775,6 +823,44 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
   .kicker {
     font-size: 12px !important;
     padding: 6px 12px !important;
+  }
+  
+  /* Testimonial mobile layout */
+  .testimonial-mobile {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 20px !important;
+    padding: 20px 30px 20px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  
+  .testimonial-mobile::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  .testimonial-card {
+    min-width: 300px !important;
+    max-width: 300px !important;
+    scroll-snap-align: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .testimonial-card .testimonial-bubble {
+    background: white !important;
+    border-radius: 20px !important;
+    padding: 20px !important;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.1) !important;
+    border: 2px solid var(--cta) !important;
+    height: auto !important;
+    min-height: auto !important;
+    text-align: center !important;
+  }
+  
+  .testimonial-desktop {
+    display: none !important;
   }
   
   /* Ensure contact and payment panels have same width on mobile */
@@ -1806,19 +1892,74 @@ footer::before {
     
     <h2 style="text-align: center; margin-bottom: 40px;">What Pet Parents Say</h2>
     
-    <div id="testimonial-container" style="position: relative; max-width: 600px; margin: 0 auto; text-align: center; margin-bottom: 30px;">
-      <!-- Testimonial bubble -->
-      <div id="testimonial-bubble" style="background: white; border-radius: 25px; padding: 25px; box-shadow: 0 8px 0 rgba(0,0,0,0.1); position: relative; border: 3px solid var(--cta);">
-        <!-- Speech bubble tail removed -->
-        
+    <div class="testimonial-container">
+      <!-- Desktop single testimonial view -->
+      <div id="testimonial-bubble-desktop" class="testimonial-desktop" style="background: white; border-radius: 25px; padding: 25px; box-shadow: 0 8px 0 rgba(0,0,0,0.1); position: relative; border: 3px solid var(--cta); max-width: 600px; margin: 0 auto;">
         <div id="testimonial-content">
           <!-- Content will be populated by JavaScript -->
-    </div>
+        </div>
+      </div>
+      
+      <!-- Mobile horizontal scrolling testimonials -->
+      <div class="testimonial-mobile" id="testimonial-slider">
+        <div class="testimonial-card" data-index="0">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta);">L</div>
+            <div class="testimonial-name">Lindsay C.</div>
+            <div class="testimonial-service">Drop-In Visits • Apr 15, 2025</div>
+            <p class="testimonial-text">"Meira was a wonderful sitter! She sent tons of videos and photos during each visit and was very attentive to my cat's needs. My cat is usually slow to warm up, but Meira was able to pet her and play with her every time. She's very professional. I would highly recommend her."</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-index="1">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta2);">E</div>
+            <div class="testimonial-name">Eileen N.</div>
+            <div class="testimonial-service">Drop-In Visits • Apr 12, 2025</div>
+            <p class="testimonial-text">"Meira is excellent, so reliable, communicates well and our dog loves her!"</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-index="2">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta);">A</div>
+            <div class="testimonial-name">Alex G.</div>
+            <div class="testimonial-service">Dog Walking • Jan 26, 2025</div>
+            <p class="testimonial-text">"My pups are always well taken care of! Whenever we need someone to take care of the pups we always try to get Meira!"</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-index="3">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta2);">J</div>
+            <div class="testimonial-name">Jan R.</div>
+            <div class="testimonial-service">Dog Walking • Oct 10, 2024</div>
+            <p class="testimonial-text">"Meira is so fabulous! She was lovely to meet in person, and while on vacation she picked up our dog and walked him for 3 days. I received so much information, she communicated thoroughly and I couldn't recommend more. If you're looking for a dog walker do not hesitate - so glad I connected with Meira!"</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-index="4">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta);">R</div>
+            <div class="testimonial-name">Robbie T.</div>
+            <div class="testimonial-service">Drop-In Visits • Oct 05, 2024</div>
+            <p class="testimonial-text">"Meira was fantastic with our pups and cat, and went above and beyond cleaning up after them. I'll definitely be rebooking when we go out of town again, I felt very comfortable with her as a sitter. Thanks so much!!"</p>
+          </div>
+        </div>
+        
+        <div class="testimonial-card" data-index="5">
+          <div class="testimonial-bubble">
+            <div class="testimonial-avatar" style="background: var(--cta2);">A</div>
+            <div class="testimonial-name">Amanda R.</div>
+            <div class="testimonial-service">Drop-In Visits • Oct 04, 2024</div>
+            <p class="testimonial-text">"Meira was wonderful with Deedles! Deedles doesn't warm up to people very quickly, but within days she was flopping for scritches. Meira was great with sending detailed updates and pictures every visit. She was very responsive and left my place nice and clean. Thanks, Meira!"</p>
+          </div>
+        </div>
       </div>
     </div>
     
     <!-- Navigation dots -->
-    <div style="display: flex; justify-content: center; gap: 10px;">
+    <div class="testimonial-dots" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
       <button class="dot-btn" onclick="showTestimonial(0)" style="width: 12px; height: 12px; border-radius: 50%; background: var(--cta); border: none; cursor: pointer; opacity: 1;"></button>
       <button class="dot-btn" onclick="showTestimonial(1)" style="width: 12px; height: 12px; border-radius: 50%; background: var(--cta2); border: none; cursor: pointer; opacity: 0.5;"></button>
       <button class="dot-btn" onclick="showTestimonial(2)" style="width: 12px; height: 12px; border-radius: 50%; background: var(--cta); border: none; cursor: pointer; opacity: 0.5;"></button>
@@ -2223,28 +2364,51 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
   
   window.currentTestimonial = 0;
+  let testimonialAutoAdvance;
+  
+  // Check if mobile view
+  function isMobileView() {
+    return window.innerWidth <= 1024;
+  }
   
   window.showTestimonial = function(index) {
     window.currentTestimonial = index;
     const testimonial = window.testimonials[index];
     const content = document.getElementById('testimonial-content');
-    const bubble = document.getElementById('testimonial-bubble');
+    const bubble = document.getElementById('testimonial-bubble-desktop');
     const dots = document.querySelectorAll('.dot-btn');
     
-    // Update content
-    content.innerHTML = `
-      <div style="text-align: center;">
-        <div style="width: 60px; height: 60px; background: ${testimonial.color}; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px; margin-bottom: 20px; box-shadow: 0 4px 0 rgba(0,0,0,0.1);">${testimonial.initial}</div>
-        <div style="font-weight: bold; color: var(--ink); font-size: 18px; margin-bottom: 10px;">${testimonial.name}</div>
-        <div style="font-size: 13px; color: #666; margin-bottom: 15px;">${testimonial.service}</div>
-        <p style="color: var(--ink); line-height: 1.5; font-size: 14px; margin: 0; text-align: center;">
-          "${testimonial.text}"
-        </p>
-      </div>
-    `;
-    
-    // Update bubble border color
-    bubble.style.borderColor = testimonial.color;
+    if (isMobileView()) {
+      // Mobile: scroll to the testimonial card
+      const slider = document.getElementById('testimonial-slider');
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      const targetCard = testimonialCards[index];
+      
+      if (targetCard && slider) {
+        const scrollLeft = targetCard.offsetLeft - (slider.offsetWidth / 2) + (targetCard.offsetWidth / 2);
+        slider.scrollTo({
+          left: scrollLeft,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      // Desktop: update content in single bubble
+      content.innerHTML = `
+        <div style="text-align: center;">
+          <div class="testimonial-avatar" style="background: ${testimonial.color};">${testimonial.initial}</div>
+          <div class="testimonial-name">${testimonial.name}</div>
+          <div class="testimonial-service">${testimonial.service}</div>
+          <p class="testimonial-text">
+            "${testimonial.text}"
+          </p>
+        </div>
+      `;
+      
+      // Update bubble border color
+      if (bubble) {
+        bubble.style.borderColor = testimonial.color;
+      }
+    }
     
     // Update dots
     dots.forEach((dot, i) => {
@@ -2262,11 +2426,61 @@ document.addEventListener('DOMContentLoaded', function() {
     window.showTestimonial(window.currentTestimonial);
   };
   
+  // Handle mobile scroll events to update dots
+  const testimonialSlider = document.getElementById('testimonial-slider');
+  if (testimonialSlider) {
+    testimonialSlider.addEventListener('scroll', () => {
+      if (isMobileView()) {
+        const cards = document.querySelectorAll('.testimonial-card');
+        const sliderRect = testimonialSlider.getBoundingClientRect();
+        const sliderCenter = sliderRect.left + sliderRect.width / 2;
+        
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+        
+        cards.forEach((card, index) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(cardCenter - sliderCenter);
+          
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+        
+        if (closestIndex !== window.currentTestimonial) {
+          window.currentTestimonial = closestIndex;
+          const dots = document.querySelectorAll('.dot-btn');
+          dots.forEach((dot, i) => {
+            dot.style.opacity = i === closestIndex ? '1' : '0.5';
+          });
+        }
+      }
+    });
+  }
+  
+  // Start auto-advance
+  function startTestimonialAutoAdvance() {
+    clearInterval(testimonialAutoAdvance);
+    testimonialAutoAdvance = setInterval(() => {
+      if (!isUserScrolling) {
+        window.nextTestimonial();
+      }
+    }, 5000);
+  }
+  
   // Initialize first testimonial
   window.showTestimonial(0);
+  startTestimonialAutoAdvance();
   
-  // Auto-advance every 5 seconds
-  setInterval(window.nextTestimonial, 5000);
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    // Reinitialize testimonial display when switching between mobile/desktop
+    setTimeout(() => {
+      window.showTestimonial(window.currentTestimonial);
+    }, 100);
+  });
   
   // Performance optimizations
   // Lazy load images
