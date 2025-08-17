@@ -1948,10 +1948,11 @@ footer::before {
       <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
       <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
-        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" style="display: grid; gap: 20px;">
+        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;">
           
           <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {name}">
+          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request">
+          <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -1959,8 +1960,7 @@ footer::before {
             <div style="display: grid; gap: 15px;">
                             <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Name *</label>
-                <input type="text" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
-                <input type="hidden" name="1. Your Name" value="">
+                <input type="text" name="1. Your Name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Email *</label>
@@ -2839,24 +2839,7 @@ window.nextScrapbookSlide = function() {
     }
   }, 4000);
   
-  // Pet consultation form handling with Formspree
-  const petForm = document.getElementById('pet-consultation-form');
-  if (petForm) {
-    petForm.addEventListener('submit', function(e) {
-      // Copy name to numbered field for email formatting before submission
-      const nameValue = this.querySelector('input[name="name"]').value;
-      this.querySelector('input[name="1. Your Name"]').value = nameValue;
-      
-      // Show loading state
-      const submitBtn = this.querySelector('button[type="submit"]');
-      submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
-      submitBtn.disabled = true;
-      
-      // Let the form submit naturally - don't prevent it!
-      // The _next field will handle the redirect to thanks.html
-      // Files will upload properly with multipart/form-data
-    });
-  }
+  // Form will work with pure HTML - no JavaScript needed for Formspree!
   
   // Consultation section paw trail
   const consultationSection = document.querySelector('#booking');
