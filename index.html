@@ -2843,72 +2843,18 @@ window.nextScrapbookSlide = function() {
   const petForm = document.getElementById('pet-consultation-form');
   if (petForm) {
     petForm.addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent default submission
-      
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      
-      // Show loading state
-      submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
-      submitBtn.disabled = true;
-      
-      // Copy name to numbered field for email formatting
+      // Copy name to numbered field for email formatting before submission
       const nameValue = this.querySelector('input[name="name"]').value;
       this.querySelector('input[name="1. Your Name"]').value = nameValue;
       
-      // Create a new form to submit without AJAX (for file uploads)
-      const tempForm = document.createElement('form');
-      tempForm.action = 'https://formspree.io/f/mwpqjqqg';
-      tempForm.method = 'POST';
-      tempForm.enctype = 'multipart/form-data';
-      tempForm.style.display = 'none';
+      // Show loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
+      submitBtn.disabled = true;
       
-      // Add redirect field
-      const redirectField = document.createElement('input');
-      redirectField.type = 'hidden';
-      redirectField.name = '_next';
-      redirectField.value = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
-      tempForm.appendChild(redirectField);
-      
-      // Copy all form data to temp form
-      const formData = new FormData(this);
-      for (let [key, value] of formData.entries()) {
-        if (value instanceof File) {
-          // Handle file uploads
-          const fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.name = key;
-          fileInput.style.display = 'none';
-          
-          // Create a new FileList with the file
-          const dt = new DataTransfer();
-          dt.items.add(value);
-          fileInput.files = dt.files;
-          
-          tempForm.appendChild(fileInput);
-        } else {
-          // Handle regular fields
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = value;
-          tempForm.appendChild(input);
-        }
-      }
-      
-      // Add to DOM and submit
-      document.body.appendChild(tempForm);
-      
-      // Show success state briefly before redirect
-      setTimeout(() => {
-        submitBtn.innerHTML = '<span style="margin-right: 8px;">✅</span>Sent Successfully!';
-        submitBtn.style.background = '#28a745';
-        
-        // Submit the temp form (this will redirect to thanks page)
-        setTimeout(() => {
-          tempForm.submit();
-        }, 500);
-      }, 1000);
+      // Let the form submit naturally - don't prevent it!
+      // The _next field will handle the redirect to thanks.html
+      // Files will upload properly with multipart/form-data
     });
   }
   
