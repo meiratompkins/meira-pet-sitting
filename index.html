@@ -1951,7 +1951,7 @@ footer::before {
         <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;">
           
           <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request">
+          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request - Pet Sitting Inquiry">
           <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
           
           <!-- Your Information -->
@@ -1992,7 +1992,8 @@ footer::before {
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Photos (Optional)</label>
-                <input type="file" name="7. Pet Photos" multiple accept="image/*" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="file" name="pet_photos" multiple accept="image/*" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="hidden" name="7. Pet Photos" value="[Files uploaded - see attachments]">
                 <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">Upload photos of your pets so I can get to know them!</p>
               </div>
             </div>
