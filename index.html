@@ -1955,65 +1955,29 @@ footer::before {
           <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
           <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
           <input type="hidden" name="_cc" value="mtompkins09@yahoo.com">
-          <input type="hidden" name="_format" value="html">
           
-          <!-- Custom Autoresponse for Client -->
-          <input type="hidden" name="_autoresponse" value="
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <style>
-                  body { font-family: Arial, sans-serif; background: #FFD6E3; margin: 0; padding: 20px; }
-                  .container { background: white; border-radius: 15px; padding: 30px; max-width: 600px; margin: 0 auto; border: 3px solid #FF7FA6; }
-                  .header { text-align: center; margin-bottom: 25px; }
-                  .logo { font-size: 36px; margin-bottom: 10px; }
-                  .brand { font-size: 24px; font-weight: bold; color: #FF7FA6; margin-bottom: 5px; }
-                  .subtitle { color: #666; font-size: 14px; }
-                  .message { line-height: 1.6; margin: 20px 0; }
-                  .footer { text-align: center; margin-top: 25px; padding-top: 20px; border-top: 2px dashed #FF7FA6; color: #666; font-size: 14px; }
-                  .contact { background: #FFF9F1; padding: 15px; border-radius: 10px; margin: 20px 0; border: 2px dashed #FF8B3D; }
-              </style>
-          </head>
-          <body>
-              <div class='container'>
-                  <div class='header'>
-                      <div class='logo'>🐾</div>
-                      <div class='brand'>Meira Pet Sitting</div>
-                      <div class='subtitle'>Professional Pet Care in West Hartford, CT</div>
-                  </div>
-                  
-                  <div class='message'>
-                      <h2 style='color: #FF7FA6; text-align: center;'>Thank You for Your Submission! ✅</h2>
-                      
-                      <p>Hi there!</p>
-                      
-                      <p>Thank you for submitting your pet's information! I've received your request and I'm so excited to learn about your furry family member. I can't wait to provide them with the best care possible.</p>
-                      
-                      <div class='contact'>
-                          <h3 style='color: #FF8B3D; margin-top: 0;'>🐾 What Happens Next?</h3>
-                          <ol>
-                              <li>I'll review your pet's details carefully</li>
-                              <li>I'll reach out within 24 hours</li>
-                              <li>We'll schedule your free 30-minute consultation</li>
-                              <li>We'll go over everything in person!</li>
-                          </ol>
-                      </div>
-                      
-                      <p><strong>Questions?</strong> Feel free to text me at <strong>(978) 846-9699</strong>!</p>
-                  </div>
-                  
-                  <div class='footer'>
-                      <p>Thank you for trusting me with your precious pet! 💕<br>
-                      <strong>— Meira & Gus</strong> 🐱</p>
-                      
-                      <p><strong>Meira Pet Sitting</strong><br>
-                      📧 contact@meiratompkins.com<br>
-                      📱 (978) 846-9699<br>
-                      🌐 meirapetsitting.com</p>
-                  </div>
-              </div>
-          </body>
-          </html>">
+                    <!-- Simple Text Autoresponse for Client -->
+          <input type="hidden" name="_autoresponse" value="🐾 Thank you for your pet consultation request!
+
+Hi there!
+
+Thank you for submitting your pet's information! I've received your request and I'm so excited to learn about your furry family member. I can't wait to provide them with the best care possible.
+
+🐾 What Happens Next:
+1. I'll review your pet's details carefully
+2. I'll reach out within 24 hours  
+3. We'll schedule your free 30-minute consultation
+4. We'll go over everything in person!
+
+Questions? Feel free to text me at (978) 846-9699!
+
+Thank you for trusting me with your precious pet! 💕
+— Meira & Gus 🐱
+
+Meira Pet Sitting
+📧 contact@meiratompkins.com
+📱 (978) 846-9699
+🌐 meirapetsitting.com">
           
           <!-- Email Template Fields -->
           <input type="hidden" name="_template" value="box">
@@ -2913,6 +2877,11 @@ window.nextScrapbookSlide = function() {
       // Show loading state
       submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
       submitBtn.disabled = true;
+      
+      // Fallback redirect if _next doesn't work
+      setTimeout(() => {
+        window.location.href = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
+      }, 2000);
       
       // Let Formspree handle the actual submission
       // Form will submit naturally, no need to prevent default
