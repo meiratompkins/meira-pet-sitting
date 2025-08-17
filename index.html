@@ -831,9 +831,13 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
     gap: 20px !important;
-    padding: 20px 30px 20px !important;
+    padding: 20px 0px 20px !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%) !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%) !important;
   }
   
   .testimonial-mobile::-webkit-scrollbar {
