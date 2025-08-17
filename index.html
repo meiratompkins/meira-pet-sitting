@@ -1958,7 +1958,7 @@ footer::before {
           <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {1. Your Name}">
           <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
           <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
-          <input type="hidden" name="_cc" value="2. Email Address">
+          <input type="hidden" name="_cc" value="client_email">
           <input type="hidden" name="_template" value="box">
           <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! I've received your information and I'm so excited to learn about your furry family member. I'll review your pet's details carefully and reach out within 24 hours to schedule your free 30-minute consultation. Questions? Feel free to text me at (978) 846-9699! Thank you for trusting me with your precious pet! — Meira & Gus"
           
@@ -1972,7 +1972,8 @@ footer::before {
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Email *</label>
-                <input type="email" name="2. Email Address" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="email" name="client_email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="hidden" name="2. Email Address" value="">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Phone Number *</label>
@@ -2848,7 +2849,18 @@ window.nextScrapbookSlide = function() {
     }
   }, 4000);
   
-  // Form works with pure HTML - no JavaScript needed for Formspree!
+  // Copy email value for proper formatting
+  const petForm = document.getElementById('pet-consultation-form');
+  if (petForm) {
+    petForm.addEventListener('submit', function(e) {
+      // Copy client email to numbered field for email body formatting
+      const clientEmailField = this.querySelector('input[name="client_email"]');
+      const hiddenEmailField = this.querySelector('input[name="2. Email Address"]');
+      if (clientEmailField && hiddenEmailField) {
+        hiddenEmailField.value = clientEmailField.value;
+      }
+    });
+  }
   
   // Consultation section paw trail
   const consultationSection = document.querySelector('#booking');
