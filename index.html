@@ -1951,36 +1951,10 @@ footer::before {
         <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" style="display: grid; gap: 20px;">
           
           <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {1. Your Name}">
-          <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
+          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request">
           <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
           <input type="hidden" name="_cc" value="mtompkins09@yahoo.com">
-          
-                    <!-- Simple Text Autoresponse for Client -->
-          <input type="hidden" name="_autoresponse" value="🐾 Thank you for your pet consultation request!
-
-Hi there!
-
-Thank you for submitting your pet's information! I've received your request and I'm so excited to learn about your furry family member. I can't wait to provide them with the best care possible.
-
-🐾 What Happens Next:
-1. I'll review your pet's details carefully
-2. I'll reach out within 24 hours  
-3. We'll schedule your free 30-minute consultation
-4. We'll go over everything in person!
-
-Questions? Feel free to text me at (978) 846-9699!
-
-Thank you for trusting me with your precious pet! 💕
-— Meira & Gus 🐱
-
-Meira Pet Sitting
-📧 contact@meiratompkins.com
-📱 (978) 846-9699
-🌐 meirapetsitting.com">
-          
-          <!-- Email Template Fields -->
-          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="_autoresponse" value="Thank you for submitting your pet consultation request! I've received your information and will reach out within 24 hours to schedule our free consultation. Looking forward to meeting you and your furry family! - Meira & Gus 🐾">
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -2870,7 +2844,9 @@ window.nextScrapbookSlide = function() {
   // Pet consultation form handling with Formspree
   const petForm = document.getElementById('pet-consultation-form');
   if (petForm) {
-    petForm.addEventListener('submit', function(e) {
+    petForm.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Prevent default submission
+      
       const submitBtn = this.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
       
@@ -2878,13 +2854,50 @@ window.nextScrapbookSlide = function() {
       submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
       submitBtn.disabled = true;
       
-      // Fallback redirect if _next doesn't work
-      setTimeout(() => {
-        window.location.href = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
-      }, 2000);
-      
-      // Let Formspree handle the actual submission
-      // Form will submit naturally, no need to prevent default
+      try {
+        // Collect form data
+        const formData = new FormData(this);
+        
+        // Submit to Formspree
+        const response = await fetch('https://formspree.io/f/mwpqjqqg', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Success! Send confirmation email to client
+          const clientEmail = formData.get('2. Email Address');
+          const clientName = formData.get('1. Your Name');
+          
+          // Send confirmation email using EmailJS or similar service
+          // For now, we'll redirect to thanks page
+          
+          submitBtn.innerHTML = '<span style="margin-right: 8px;">✅</span>Sent Successfully!';
+          submitBtn.style.background = '#28a745';
+          
+          // Redirect to custom thanks page
+          setTimeout(() => {
+            window.location.href = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
+          }, 1500);
+          
+        } else {
+          throw new Error('Form submission failed');
+        }
+        
+      } catch (error) {
+        // Error handling
+        submitBtn.innerHTML = '<span style="margin-right: 8px;">❌</span>Error - Try Again';
+        submitBtn.style.background = '#dc3545';
+        submitBtn.disabled = false;
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.background = 'var(--cta)';
+        }, 3000);
+      }
     });
   }
   
