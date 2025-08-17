@@ -1951,10 +1951,7 @@ footer::before {
         <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" style="display: grid; gap: 20px;">
           
           <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request">
-          <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
-          <input type="hidden" name="_cc" value="mtompkins09@yahoo.com">
-          <input type="hidden" name="_autoresponse" value="Thank you for submitting your pet consultation request! I've received your information and will reach out within 24 hours to schedule our free consultation. Looking forward to meeting you and your furry family! - Meira & Gus 🐾">
+          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {name}">
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -1962,7 +1959,8 @@ footer::before {
             <div style="display: grid; gap: 15px;">
                             <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Name *</label>
-                <input type="text" name="1. Your Name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="text" name="name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="hidden" name="1. Your Name" value="">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Email *</label>
@@ -2844,7 +2842,7 @@ window.nextScrapbookSlide = function() {
   // Pet consultation form handling with Formspree
   const petForm = document.getElementById('pet-consultation-form');
   if (petForm) {
-    petForm.addEventListener('submit', async function(e) {
+    petForm.addEventListener('submit', function(e) {
       e.preventDefault(); // Prevent default submission
       
       const submitBtn = this.querySelector('button[type="submit"]');
@@ -2854,50 +2852,63 @@ window.nextScrapbookSlide = function() {
       submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
       submitBtn.disabled = true;
       
-      try {
-        // Collect form data
-        const formData = new FormData(this);
-        
-        // Submit to Formspree
-        const response = await fetch('https://formspree.io/f/mwpqjqqg', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        if (response.ok) {
-          // Success! Send confirmation email to client
-          const clientEmail = formData.get('2. Email Address');
-          const clientName = formData.get('1. Your Name');
+      // Copy name to numbered field for email formatting
+      const nameValue = this.querySelector('input[name="name"]').value;
+      this.querySelector('input[name="1. Your Name"]').value = nameValue;
+      
+      // Create a new form to submit without AJAX (for file uploads)
+      const tempForm = document.createElement('form');
+      tempForm.action = 'https://formspree.io/f/mwpqjqqg';
+      tempForm.method = 'POST';
+      tempForm.enctype = 'multipart/form-data';
+      tempForm.style.display = 'none';
+      
+      // Add redirect field
+      const redirectField = document.createElement('input');
+      redirectField.type = 'hidden';
+      redirectField.name = '_next';
+      redirectField.value = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
+      tempForm.appendChild(redirectField);
+      
+      // Copy all form data to temp form
+      const formData = new FormData(this);
+      for (let [key, value] of formData.entries()) {
+        if (value instanceof File) {
+          // Handle file uploads
+          const fileInput = document.createElement('input');
+          fileInput.type = 'file';
+          fileInput.name = key;
+          fileInput.style.display = 'none';
           
-          // Send confirmation email using EmailJS or similar service
-          // For now, we'll redirect to thanks page
+          // Create a new FileList with the file
+          const dt = new DataTransfer();
+          dt.items.add(value);
+          fileInput.files = dt.files;
           
-          submitBtn.innerHTML = '<span style="margin-right: 8px;">✅</span>Sent Successfully!';
-          submitBtn.style.background = '#28a745';
-          
-          // Redirect to custom thanks page
-          setTimeout(() => {
-            window.location.href = 'https://meiratompkins.github.io/meira-pet-sitting/thanks.html';
-          }, 1500);
-          
+          tempForm.appendChild(fileInput);
         } else {
-          throw new Error('Form submission failed');
+          // Handle regular fields
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = value;
+          tempForm.appendChild(input);
         }
-        
-      } catch (error) {
-        // Error handling
-        submitBtn.innerHTML = '<span style="margin-right: 8px;">❌</span>Error - Try Again';
-        submitBtn.style.background = '#dc3545';
-        submitBtn.disabled = false;
-        
-        setTimeout(() => {
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.background = 'var(--cta)';
-        }, 3000);
       }
+      
+      // Add to DOM and submit
+      document.body.appendChild(tempForm);
+      
+      // Show success state briefly before redirect
+      setTimeout(() => {
+        submitBtn.innerHTML = '<span style="margin-right: 8px;">✅</span>Sent Successfully!';
+        submitBtn.style.background = '#28a745';
+        
+        // Submit the temp form (this will redirect to thanks page)
+        setTimeout(() => {
+          tempForm.submit();
+        }, 500);
+      }, 1000);
     });
   }
   
