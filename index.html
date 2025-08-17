@@ -100,6 +100,13 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0; background:var(--pink); color:var(--ink); font-family:Quicksand,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; scroll-behavior:smooth; line-height:1.6; scroll-padding-top: 80px;}
+
+/* Global placeholder font consistency */
+input::placeholder,
+textarea::placeholder {
+  font-family: Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  opacity: 0.7;
+}
 /* Focus styles for accessibility */
 *:focus {
   outline: 2px solid var(--cta);
@@ -725,6 +732,17 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     padding: 0 30px;
   }
   
+  /* Move husky up on mobile */
+  .left-edge-husky {
+    top: 23vh !important;
+    left: -150px !important;
+  }
+  
+  .left-edge-husky .husky-img {
+    width: 300px !important;
+    height: 300px !important;
+  }
+  
   .hero h1 {
     font-size: 42px;
   }
@@ -831,7 +849,7 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
     gap: 20px !important;
-    padding: 20px 0px 20px !important;
+    padding: 20px calc(50vw - 150px) 20px !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     width: 100vw !important;
@@ -872,6 +890,67 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     width: 100% !important;
     max-width: 350px !important;
     margin: 0 auto !important;
+  }
+  
+  /* Pet consultation form mobile styles */
+  #pet-consultation-form {
+    gap: 15px !important;
+  }
+  
+  #pet-consultation-form .panel {
+    padding: 20px !important;
+  }
+  
+  #pet-consultation-form h3 {
+    font-size: 18px !important;
+  }
+  
+  #pet-consultation-form input,
+  #pet-consultation-form textarea,
+  #pet-consultation-form select {
+    font-size: 16px !important;
+    padding: 10px !important;
+  }
+  
+  #pet-consultation-form textarea {
+    min-height: 120px !important;
+  }
+  
+  #pet-consultation-form textarea[name="pet_names_ages"],
+  #pet-consultation-form textarea[name="medical_history"],
+  #pet-consultation-form textarea[name="feeding_routine"],
+  #pet-consultation-form textarea[name="play_routine"],
+  #pet-consultation-form textarea[name="quirks"],
+  #pet-consultation-form textarea[name="additional_notes"] {
+    min-height: 140px !important;
+  }
+  
+  #pet-consultation-form div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  
+  #pet-consultation-form div[style*="background: #FFF9F1"],
+  #pet-consultation-form div[style*="background: #F0F8FF"],
+  #pet-consultation-form div[style*="background: #FFF0F5"],
+  #pet-consultation-form div[style*="background: #F5FFF0"],
+  #pet-consultation-form div[style*="background: #F0F0FF"],
+  #pet-consultation-form div[style*="background: #FFFACD"] {
+    padding: 15px !important;
+  }
+  
+  /* Fix font consistency for form elements */
+  #pet-consultation-form input,
+  #pet-consultation-form textarea,
+  #pet-consultation-form select,
+  #pet-consultation-form button {
+    font-family: Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+  }
+  
+  #pet-consultation-form input::placeholder,
+  #pet-consultation-form textarea::placeholder {
+    font-family: Quicksand, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+    opacity: 0.7 !important;
   }
 }
 
@@ -1117,15 +1196,15 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
 
 .left-edge-husky {
   position: absolute;
-  left: -200px;
-  top: 120px;
+  left: -300px;
+  top: 220px;
   animation: popInLeft 4s ease-in-out infinite;
   animation-delay: 2s;
 }
 
 .left-edge-husky .husky-img {
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   object-fit: contain;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)) brightness(1.1) contrast(1.2);
   transition: all 0.3s ease;
@@ -1230,7 +1309,7 @@ body{
   50% { background-position: 100% 50%; }
 }
 
-.btn{display:inline-block; padding:14px 20px; border-radius:20px; background:var(--cta); color:#fff; font-weight:800; box-shadow:0 6px 0 rgba(0,0,0,.12); transition:all 0.3s ease; position:relative; overflow:hidden}
+.btn{display:inline-block; padding:14px 20px; border-radius:20px; background:var(--cta); color:#fff; font-weight:800; box-shadow:0 6px 0 rgba(0,0,0,.12); transition:all 0.3s ease; position:relative; overflow:hidden; font-family:Quicksand,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; border:none; cursor:pointer}
 .btn:hover{transform:translateY(-3px); box-shadow:0 8px 0 rgba(0,0,0,.15); background:var(--cta2); color:#fff; animation: wiggle 0.5s ease-in-out}
 .btn:active{transform:translateY(-1px); box-shadow:0 4px 0 rgba(0,0,0,.12)}
 .btn.alt{background:var(--cta2)}
@@ -1622,6 +1701,7 @@ footer::before {
     <div class="nav-links" id="nav-links">
       <a href="#about" class="nav-link">About</a>
       <a href="#services" class="nav-link">Services</a>
+      <a href="#booking" class="nav-link">Get Started</a>
       <a href="#contact" class="nav-link">Contact</a>
       <div class="nav-buttons">
         <a href="#booking" class="nav-btn">Free Consult</a>
@@ -1656,8 +1736,9 @@ footer::before {
                 <div class="meet-services">
           <h4>🐾 What I Offer</h4>
           <ul>
-            <li>Cat drop‑ins with lots of cuddles</li>
-            <li>Dog walks with photo updates</li>
+            <li>Cat drop-ins with lots of cuddles</li>
+            <li>Dog walks + drop-ins</li>
+            <li>Photo & video updates every visit</li>
             <li>Strava route links for walks</li>
             <li>Medication administration</li>
             <li>Holiday and extended care</li>
@@ -1683,7 +1764,7 @@ footer::before {
           <span class="tape"></span>
           <img src="original.webp" alt="Gus the calico cat" class="meet-img">
           <div class="cap">Gus 🐱</div>
-          <div class="sub">The curious calico</div>
+          <div class="sub">A curious lil boy!</div>
         </div>
         <div class="polaroid" style="--rot:3deg">
           <span class="tape r"></span>
@@ -1862,19 +1943,201 @@ footer::before {
     <div style="position: absolute; bottom: 40px; left: 15%; font-size: 42px; opacity: 0.1;">🐱</div>
     <div style="position: absolute; bottom: 80px; right: 12%; font-size: 38px; opacity: 0.1;">🐕</div>
     
-          <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <h2 style="margin-bottom: 20px;">Book a Free 30‑Minute Consultation</h2>
-        <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">We'll cover routines, health notes, keys/lockbox, and your pet's favorite&nbsp;things.</p>
-        
+    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+      <h2 style="margin-bottom: 20px;">Tell Me About Your Pet</h2>
+      <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
-      <div class="panel" style="text-align: center; background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 30px; max-width: 500px; margin: 0 auto;">
-        <div style="margin-bottom: 20px;">
-          <span style="font-size: 48px; display: block; margin-bottom: 10px;">📅</span>
-          <h3 style="color: var(--cta); margin-bottom: 10px;">Ready to Get Started?</h3>
-          <p style="color: #666; margin-bottom: 20px;">Let's meet and make sure we're a perfect fit!</p>
-        </div>
-        <a class="btn" href="https://calendly.com/contact-meiratompkins" target="_blank" rel="noopener" style="font-size: 18px; padding: 16px 32px;">Book Consultation</a>
-        <p class="small" style="margin-top: 20px;">Prefer text/email? Reach out below.</p>
+      <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
+        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" style="display: grid; gap: 20px;">
+          
+          <!-- Hidden Formspree Configuration -->
+          <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {1. Your Name}">
+          <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
+          <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
+          <input type="hidden" name="_cc" value="mtompkins09@yahoo.com">
+          <input type="hidden" name="_format" value="html">
+          
+          <!-- Custom Autoresponse for Client -->
+          <input type="hidden" name="_autoresponse" value="
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <style>
+                  body { font-family: Arial, sans-serif; background: #FFD6E3; margin: 0; padding: 20px; }
+                  .container { background: white; border-radius: 15px; padding: 30px; max-width: 600px; margin: 0 auto; border: 3px solid #FF7FA6; }
+                  .header { text-align: center; margin-bottom: 25px; }
+                  .logo { font-size: 36px; margin-bottom: 10px; }
+                  .brand { font-size: 24px; font-weight: bold; color: #FF7FA6; margin-bottom: 5px; }
+                  .subtitle { color: #666; font-size: 14px; }
+                  .message { line-height: 1.6; margin: 20px 0; }
+                  .footer { text-align: center; margin-top: 25px; padding-top: 20px; border-top: 2px dashed #FF7FA6; color: #666; font-size: 14px; }
+                  .contact { background: #FFF9F1; padding: 15px; border-radius: 10px; margin: 20px 0; border: 2px dashed #FF8B3D; }
+              </style>
+          </head>
+          <body>
+              <div class='container'>
+                  <div class='header'>
+                      <div class='logo'>🐾</div>
+                      <div class='brand'>Meira Pet Sitting</div>
+                      <div class='subtitle'>Professional Pet Care in West Hartford, CT</div>
+                  </div>
+                  
+                  <div class='message'>
+                      <h2 style='color: #FF7FA6; text-align: center;'>Thank You for Your Submission! ✅</h2>
+                      
+                      <p>Hi there!</p>
+                      
+                      <p>Thank you for submitting your pet's information! I've received your request and I'm so excited to learn about your furry family member. I can't wait to provide them with the best care possible.</p>
+                      
+                      <div class='contact'>
+                          <h3 style='color: #FF8B3D; margin-top: 0;'>🐾 What Happens Next?</h3>
+                          <ol>
+                              <li>I'll review your pet's details carefully</li>
+                              <li>I'll reach out within 24 hours</li>
+                              <li>We'll schedule your free 30-minute consultation</li>
+                              <li>We'll go over everything in person!</li>
+                          </ol>
+                      </div>
+                      
+                      <p><strong>Questions?</strong> Feel free to text me at <strong>(978) 846-9699</strong>!</p>
+                  </div>
+                  
+                  <div class='footer'>
+                      <p>Thank you for trusting me with your precious pet! 💕<br>
+                      <strong>— Meira & Gus</strong> 🐱</p>
+                      
+                      <p><strong>Meira Pet Sitting</strong><br>
+                      📧 contact@meiratompkins.com<br>
+                      📱 (978) 846-9699<br>
+                      🌐 meirapetsitting.com</p>
+                  </div>
+              </div>
+          </body>
+          </html>">
+          
+          <!-- Email Template Fields -->
+          <input type="hidden" name="_template" value="box">
+          
+          <!-- Your Information -->
+          <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
+            <h3 style="color: var(--cta2); margin: 0 0 15px 0; font-size: 20px;">👋 About You</h3>
+            <div style="display: grid; gap: 15px;">
+                            <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Name *</label>
+                <input type="text" name="1. Your Name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Email *</label>
+                <input type="email" name="2. Email Address" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Phone Number *</label>
+                <input type="tel" name="3. Phone Number" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">What town are you located in? *</label>
+                <input type="text" name="4. What town are you located in?" required placeholder="e.g., West Hartford, CT" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Address *</label>
+                <textarea name="5. Your Address (where pet visits will take place)" required placeholder="Street address where pet visits will take place" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+                <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">This helps me plan my route and confirm I can service your area.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pet Information -->
+          <div style="background: #F0F8FF; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta);">
+            <h3 style="color: var(--cta); margin: 0 0 15px 0; font-size: 20px;">🐾 About Your Pet(s)</h3>
+            <div style="display: grid; gap: 15px;">
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Names & Ages *</label>
+                <textarea name="6. Pet Names & Ages" required placeholder="e.g., Bella (3 years old cat), Max (5 years old golden retriever)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Photos (Optional)</label>
+                <input type="file" name="7. Pet Photos" multiple accept="image/*" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">Upload photos of your pets so I can get to know them!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Health & Care Information -->
+          <div style="background: #FFF0F5; padding: 20px; border-radius: 15px; border: 2px dashed #FF69B4;">
+            <h3 style="color: #FF69B4; margin: 0 0 15px 0; font-size: 20px;">🏥 Health & Care</h3>
+            <div style="display: grid; gap: 15px;">
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Medical History & Current Medications</label>
+                <textarea name="8. Medical History & Current Medications" placeholder="Any health conditions, medications, allergies, or special medical needs..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Veterinarian Information</label>
+                <textarea name="9. Veterinarian Information" placeholder="Vet name, clinic, phone number, any recent visits..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daily Routines -->
+          <div style="background: #F5FFF0; padding: 20px; border-radius: 15px; border: 2px dashed #32CD32;">
+            <h3 style="color: #228B22; margin: 0 0 15px 0; font-size: 20px;">📅 Daily Routines</h3>
+            <div style="display: grid; gap: 15px;">
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Feeding Routine *</label>
+                <textarea name="10. What is your pet's feeding routine?" required placeholder="What food, how much, how often, feeding times, treats, special instructions..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Play & Exercise Routine</label>
+                <textarea name="11. What is your pet's play & exercise routine?" placeholder="Favorite toys, games, exercise needs, walk duration/frequency..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+              </div>
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Quirks & Special Notes</label>
+                <textarea name="12. What quirks or special things should I know about your pet?" placeholder="Personality traits, likes/dislikes, fears, habits, anything that helps me understand your pet better..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Details -->
+          <div style="background: #F0F0FF; padding: 20px; border-radius: 15px; border: 2px dashed #6A5ACD;">
+            <h3 style="color: #6A5ACD; margin: 0 0 15px 0; font-size: 20px;">📋 Service Needs</h3>
+            <div style="display: grid; gap: 15px;">
+              <div>
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">What days do you need visits? *</label>
+                <textarea name="13. What days do you need visits?" required placeholder="e.g., Dec 20-25, every weekday, weekends only, specific dates..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Preferred Time</label>
+                  <input type="text" name="14. What time do you prefer visits?" placeholder="e.g., 2-4pm, morning, flexible" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                </div>
+                <div>
+                  <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Time Flexibility</label>
+                  <select name="15. How flexible are you with timing?" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                    <option value="">Select flexibility</option>
+                    <option value="very_flexible">Very flexible</option>
+                    <option value="somewhat_flexible">Somewhat flexible</option>
+                    <option value="specific_times">Need specific times</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Notes -->
+          <div style="background: #FFFACD; padding: 20px; border-radius: 15px; border: 2px dashed #DAA520;">
+            <h3 style="color: #B8860B; margin: 0 0 15px 0; font-size: 20px;">💭 Anything Else?</h3>
+            <textarea name="16. Anything else I should know?" placeholder="Anything else you'd like me to know? Questions about my services? Special requests?" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 100px; resize: vertical;"></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn">
+              <span style="margin-right: 8px;">📧</span>
+              Send My Pet's Info
+            </button>
+            <p style="font-size: 14px; color: #666; margin-top: 15px;">I'll review your information and reach out within 24 hours to schedule our free consultation!</p>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
@@ -2639,6 +2902,22 @@ window.nextScrapbookSlide = function() {
       window.showScrapbookSlide(currentScrapbookSlide);
     }
   }, 4000);
+  
+  // Pet consultation form handling with Formspree
+  const petForm = document.getElementById('pet-consultation-form');
+  if (petForm) {
+    petForm.addEventListener('submit', function(e) {
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      // Show loading state
+      submitBtn.innerHTML = '<span style="margin-right: 8px;">⏳</span>Sending...';
+      submitBtn.disabled = true;
+      
+      // Let Formspree handle the actual submission
+      // Form will submit naturally, no need to prevent default
+    });
+  }
   
   // Consultation section paw trail
   const consultationSection = document.querySelector('#booking');
