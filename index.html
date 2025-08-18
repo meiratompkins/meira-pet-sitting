@@ -1958,6 +1958,7 @@ footer::before {
           <input type="hidden" name="_subject" value="🐾 New Pet Consultation Request from {1. Your Name}">
           <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
           <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
+          <input type="hidden" name="_cc" id="cc-field" value="">
           <input type="hidden" name="_template" value="box">
           <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! I've received your information and I'm so excited to learn about your furry family member. I'll review your pet's details carefully and reach out within 24 hours to schedule your free 30-minute consultation. Questions? Feel free to text me at (978) 846-9699! Thank you for trusting me with your precious pet! — Meira & Gus"
           
@@ -2847,7 +2848,38 @@ window.nextScrapbookSlide = function() {
     }
   }, 4000);
   
-  // Form submission is now handled by Formspree directly without CC field
+  // Form submission handler to copy email address to CC field
+  const petForm = document.getElementById('pet-consultation-form');
+  if (petForm) {
+    // Set up form validation and CC field population on submit
+    petForm.addEventListener('submit', function(e) {
+      const emailField = document.querySelector('input[name="2. Email Address"]');
+      const ccField = document.getElementById('cc-field');
+      
+      console.log('Form submitting...', emailField?.value);
+      
+      if (emailField && emailField.value && emailField.value.trim()) {
+        ccField.value = emailField.value.trim();
+        console.log('CC field set to:', ccField.value);
+      } else {
+        console.warn('No email found to set CC field');
+      }
+      
+      // Let the form submit naturally
+      return true;
+    });
+    
+    // Also update CC field when email field changes (backup)
+    const emailField = document.querySelector('input[name="2. Email Address"]');
+    if (emailField) {
+      emailField.addEventListener('input', function() {
+        const ccField = document.getElementById('cc-field');
+        if (ccField && this.value) {
+          ccField.value = this.value.trim();
+        }
+      });
+    }
+  }
   
   // Consultation section paw trail
   const consultationSection = document.querySelector('#booking');
