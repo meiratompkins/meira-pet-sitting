@@ -3004,12 +3004,37 @@ async function sendEmails(event) {
     console.log('Admin Template:', 'template_vx4isgb');
     console.log('Client Template:', 'template_ofhw96d');
     
-    // Send admin email first (always use regular send, attachments handled separately)
+    // Send admin email with form data (and try attachments if present)
     console.log('Sending admin email...');
     console.log('Template params:', JSON.stringify(templateParams, null, 2));
     
-    // Always use emailjs.send for reliable form data
-    const adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
+    let adminResult;
+    if (templateParams.attachments && templateParams.attachments.length > 0) {
+      console.log('Trying to send with attachments using sendForm...');
+      
+      // Add all templateParams as hidden form fields for sendForm
+      const tempInputs = [];
+      for (const [key, value] of Object.entries(templateParams)) {
+        if (key !== 'attachments') { // Skip the attachments object
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = key;
+          hiddenInput.value = value || '';
+          form.appendChild(hiddenInput);
+          tempInputs.push(hiddenInput);
+        }
+      }
+      
+      // Try sendForm for attachments
+      adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
+      
+      // Remove temporary hidden inputs after sending
+      tempInputs.forEach(input => form.removeChild(input));
+    } else {
+      console.log('Sending without attachments...');
+      // Use regular send for text-only
+      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
+    }
     console.log('Admin email sent successfully:', adminResult);
     
     // Send client autoresponse (no attachments needed)
