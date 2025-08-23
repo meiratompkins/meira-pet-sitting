@@ -3064,19 +3064,13 @@ async function sendEmails(event) {
     if (templateParams.hasAttachments) {
       console.log('🔗 Sending with attachments using sendForm...');
       
-      // Add all templateParams as hidden form fields for sendForm
-      const tempInputs = [];
-      for (const [key, value] of Object.entries(templateParams)) {
-        if (key !== 'hasAttachments') { // Skip the boolean flag
-          const hiddenInput = document.createElement('input');
-          hiddenInput.type = 'hidden';
-          hiddenInput.name = key;
-          hiddenInput.value = value || '';
-          form.appendChild(hiddenInput);
-          tempInputs.push(hiddenInput);
-          console.log(`➕ Added hidden field: ${key} = ${value}`);
-        }
-      }
+      // Add only the pet_photos_info as a hidden field since sendForm uses form field names directly
+      const tempInput = document.createElement('input');
+      tempInput.type = 'hidden';
+      tempInput.name = 'pet_photos_info';
+      tempInput.value = templateParams.pet_photos_info || '';
+      form.appendChild(tempInput);
+      console.log(`➕ Added pet_photos_info: ${templateParams.pet_photos_info}`);
       
       console.log('📋 Form fields before sending:');
       const formData = new FormData(form);
@@ -3088,16 +3082,34 @@ async function sendEmails(event) {
         }
       }
       
-      // Try sendForm for attachments
+      // Try sendForm for attachments (uses original form field names)
       adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
       console.log('✅ sendForm completed');
       
-      // Remove temporary hidden inputs after sending
-      tempInputs.forEach(input => form.removeChild(input));
+      // Remove temporary hidden input after sending
+      form.removeChild(tempInput);
     } else {
       console.log('📤 Sending without attachments using send...');
-      // Use regular send for text-only
-      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
+      // Use regular send for text-only - map to form field names for consistency
+      const formFieldParams = {
+        '1. Your Name': templateParams.client_name,
+        '2. Email Address': templateParams.client_email,
+        '3. Phone Number': templateParams.client_phone,
+        '4. What town are you located in?': templateParams.client_location,
+        '5. Your Address (where pet visits will take place)': templateParams.client_address,
+        '6. Pet Names & Ages': templateParams.pet_names,
+        '8. Medical History & Current Medications': templateParams.medical_history,
+        '9. Veterinarian Information': templateParams.vet_info,
+        '10. What is your pet\'s feeding routine?': templateParams.feeding_routine,
+        '11. What is your pet\'s play & exercise routine?': templateParams.exercise_routine,
+        '12. What quirks or special things should I know about your pet?': templateParams.special_notes,
+        '13. What days do you need visits?': templateParams.service_days,
+        '14. What time do you prefer visits?': templateParams.preferred_time,
+        '15. How flexible are you with timing?': templateParams.time_flexibility,
+        '16. Anything else I should know?': templateParams.additional_notes,
+        'pet_photos_info': templateParams.pet_photos_info
+      };
+      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', formFieldParams);
     }
     console.log('Admin email sent successfully:', adminResult);
     
