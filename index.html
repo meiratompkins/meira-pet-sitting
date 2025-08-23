@@ -1960,8 +1960,8 @@ footer::before {
           <input type="hidden" name="_replyto" id="_replyto" value="">
           <input type="hidden" name="_cc" id="cc-field" value="">
           <input type="hidden" name="_format" value="plain">
-          <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="_autoresponse" value="Subject: Thank you for your pet consultation request! 🐾
+
+          <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! 🐾
 
 Hi there!
 
@@ -1981,8 +1981,8 @@ Thank you for trusting me with your precious pet! 💕
 — Meira & Gus 🐱
 
 Meira Pet Sitting
-📧 contact@meiratompkins.com  
-📱 (978) 846-9699"
+📧 contact@meiratompkins.com">
+          <input type="hidden" name="_autoresponse.subject" value="Thank you for your pet consultation request! 🐾">
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -3010,7 +3010,7 @@ function updateSubjectWithName() {
   const subjectField = document.querySelector('input[name="_subject"]');
   const replyToField = document.querySelector('input[name="_replyto"]');
   
-  // Update subject line with client name
+  // Update subject line with client name (this goes to admin/you)
   if (nameField && nameField.value.trim() && subjectField) {
     const clientName = nameField.value.trim();
     subjectField.value = `🐾 NEW CLIENT: ${clientName} - Pet Consultation Request (Photos Included)`;
