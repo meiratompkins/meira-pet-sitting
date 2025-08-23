@@ -2981,18 +2981,30 @@ async function sendEmails(event) {
       additional_notes: formData.get('15. Anything Else?')
     };
     
-    // Send admin email
-    await emailjs.send('service_6htvf0p', 'template_vx4isgb', templateParams);
+    console.log('Form data being sent:', templateParams);
+    console.log('Service ID:', 'service_9z6mrkt');
+    console.log('Admin Template:', 'template_vx4isgb');
+    console.log('Client Template:', 'template_ofhw96d');
+    
+    // Send admin email first
+    console.log('Sending admin email...');
+    const adminResult = await emailjs.send('service_9z6mrkt', 'template_vx4isgb', templateParams);
+    console.log('Admin email sent successfully:', adminResult);
     
     // Send client autoresponse
-    await emailjs.send('service_6htvf0p', 'template_ofhw96d', templateParams);
+    console.log('Sending client email...');
+    const clientResult = await emailjs.send('service_9z6mrkt', 'template_ofhw96d', templateParams);
+    console.log('Client email sent successfully:', clientResult);
     
     // Redirect to thank you page
     window.location.href = 'https://meirapetsitting.com/thanks.html';
     
   } catch (error) {
-    console.error('Error sending emails:', error);
-    alert('Sorry, there was an error sending your request. Please try again or email me directly at contact@meiratompkins.com');
+    console.error('Detailed error sending emails:', error);
+    console.error('Error message:', error.message);
+    console.error('Error status:', error.status);
+    console.error('Error text:', error.text);
+    alert(`Error details: ${error.message || error.text || 'Unknown error'}. Please try again or email me directly at contact@meiratompkins.com`);
     
     // Reset button
     submitButton.innerHTML = originalText;
