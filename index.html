@@ -2981,17 +2981,37 @@ async function sendEmails(event) {
       additional_notes: formData.get('15. Anything Else?')
     };
     
+    // Handle file attachments
+    const fileInput = form.querySelector('input[name="pet_photos"]');
+    if (fileInput && fileInput.files.length > 0) {
+      templateParams.attachments = [];
+      for (let i = 0; i < fileInput.files.length; i++) {
+        templateParams.attachments.push({
+          name: fileInput.files[i].name,
+          data: fileInput.files[i]
+        });
+      }
+      console.log('Files to attach:', templateParams.attachments.length);
+    }
+    
     console.log('Form data being sent:', templateParams);
     console.log('Service ID:', 'service_p2ct36r');
     console.log('Admin Template:', 'template_vx4isgb');
     console.log('Client Template:', 'template_ofhw96d');
     
-    // Send admin email first
+    // Send admin email first (with attachments if present)
     console.log('Sending admin email...');
-    const adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
+    let adminResult;
+    if (templateParams.attachments && templateParams.attachments.length > 0) {
+      // Use sendForm for file attachments
+      adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
+    } else {
+      // Use regular send for text-only
+      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
+    }
     console.log('Admin email sent successfully:', adminResult);
     
-    // Send client autoresponse
+    // Send client autoresponse (no attachments needed)
     console.log('Sending client email...');
     const clientResult = await emailjs.send('service_p2ct36r', 'template_ofhw96d', templateParams);
     console.log('Client email sent successfully:', clientResult);
