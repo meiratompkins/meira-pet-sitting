@@ -1952,15 +1952,16 @@ footer::before {
       <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
       <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
-        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;">
+        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
           
           <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 NEW CLIENT: {1. Your Name} - Pet Consultation Request (Photos Included)">
-          <input type="hidden" name="_next" value="https://meiratompkins.github.io/meira-pet-sitting/thanks.html">
-          <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
+          <input type="hidden" name="_subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
+          <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
+          <input type="hidden" name="_replyto" value="2. Email">
           <input type="hidden" name="_cc" id="cc-field" value="">
+          <input type="hidden" name="_format" value="plain">
           <input type="hidden" name="_template" value="box">
-          <input type="hidden" name="_autoresponse" value="🐾 Thank you for your pet consultation request!
+          <input type="hidden" name="_autoresponse" value="Subject: Thank you for your pet consultation request! 🐾
 
 Hi there!
 
@@ -3001,6 +3002,19 @@ window.nextScrapbookSlide = function() {
     }, 2000);
   }
 });
+
+// Function to update subject line with client name before form submission
+function updateSubjectWithName() {
+  const nameField = document.querySelector('input[name="1. Your Name"]');
+  const subjectField = document.querySelector('input[name="_subject"]');
+  
+  if (nameField && nameField.value.trim() && subjectField) {
+    const clientName = nameField.value.trim();
+    subjectField.value = `🐾 NEW CLIENT: ${clientName} - Pet Consultation Request (Photos Included)`;
+  }
+  
+  return true; // Allow form submission to continue
+}
 </script>
 </body>
 </html>
