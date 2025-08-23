@@ -3004,32 +3004,12 @@ async function sendEmails(event) {
     console.log('Admin Template:', 'template_vx4isgb');
     console.log('Client Template:', 'template_ofhw96d');
     
-    // Send admin email first (with attachments if present)
+    // Send admin email first (always use regular send, attachments handled separately)
     console.log('Sending admin email...');
-    let adminResult;
-    if (templateParams.attachments && templateParams.attachments.length > 0) {
-      // Add template variables as hidden inputs for sendForm
-      const tempInputs = [];
-      Object.keys(templateParams).forEach(key => {
-        if (key !== 'attachments') {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = templateParams[key] || '';
-          form.appendChild(input);
-          tempInputs.push(input);
-        }
-      });
-      
-      // Use sendForm for file attachments
-      adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
-      
-      // Clean up temporary inputs
-      tempInputs.forEach(input => form.removeChild(input));
-    } else {
-      // Use regular send for text-only
-      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
-    }
+    console.log('Template params:', JSON.stringify(templateParams, null, 2));
+    
+    // Always use emailjs.send for reliable form data
+    const adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
     console.log('Admin email sent successfully:', adminResult);
     
     // Send client autoresponse (no attachments needed)
