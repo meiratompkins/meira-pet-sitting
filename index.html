@@ -2985,13 +2985,18 @@ async function sendEmails(event) {
     const fileInput = form.querySelector('input[name="pet_photos"]');
     if (fileInput && fileInput.files.length > 0) {
       templateParams.attachments = [];
+      console.log('Found files:', fileInput.files.length);
       for (let i = 0; i < fileInput.files.length; i++) {
+        console.log('File:', fileInput.files[i].name, 'Size:', fileInput.files[i].size);
         templateParams.attachments.push({
           name: fileInput.files[i].name,
           data: fileInput.files[i]
         });
       }
       console.log('Files to attach:', templateParams.attachments.length);
+      templateParams.pet_photos_info = `${fileInput.files.length} photo(s) uploaded: ${Array.from(fileInput.files).map(f => f.name).join(', ')}`;
+    } else {
+      templateParams.pet_photos_info = 'No photos uploaded';
     }
     
     console.log('Form data being sent:', templateParams);
@@ -3003,8 +3008,24 @@ async function sendEmails(event) {
     console.log('Sending admin email...');
     let adminResult;
     if (templateParams.attachments && templateParams.attachments.length > 0) {
+      // Add template variables as hidden inputs for sendForm
+      const tempInputs = [];
+      Object.keys(templateParams).forEach(key => {
+        if (key !== 'attachments') {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = templateParams[key] || '';
+          form.appendChild(input);
+          tempInputs.push(input);
+        }
+      });
+      
       // Use sendForm for file attachments
       adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
+      
+      // Clean up temporary inputs
+      tempInputs.forEach(input => form.removeChild(input));
     } else {
       // Use regular send for text-only
       adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
