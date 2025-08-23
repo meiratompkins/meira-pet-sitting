@@ -1957,7 +1957,7 @@ footer::before {
           <!-- Hidden Formspree Configuration -->
           <input type="hidden" name="_subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
           <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
-          <input type="hidden" name="_replyto" value="2. Email Address">
+          <input type="hidden" name="_replyto" id="_replyto" value="">
           <input type="hidden" name="_cc" id="cc-field" value="">
           <input type="hidden" name="_format" value="plain">
           <input type="hidden" name="_template" value="box">
@@ -3003,14 +3003,22 @@ window.nextScrapbookSlide = function() {
   }
 });
 
-// Function to update subject line with client name before form submission
+// Function to update subject line with client name and set reply-to email before form submission
 function updateSubjectWithName() {
   const nameField = document.querySelector('input[name="1. Your Name"]');
+  const emailField = document.querySelector('input[name="2. Email Address"]');
   const subjectField = document.querySelector('input[name="_subject"]');
+  const replyToField = document.querySelector('input[name="_replyto"]');
   
+  // Update subject line with client name
   if (nameField && nameField.value.trim() && subjectField) {
     const clientName = nameField.value.trim();
     subjectField.value = `🐾 NEW CLIENT: ${clientName} - Pet Consultation Request (Photos Included)`;
+  }
+  
+  // Set reply-to field with client's email
+  if (emailField && emailField.value.trim() && replyToField) {
+    replyToField.value = emailField.value.trim();
   }
   
   return true; // Allow form submission to continue
