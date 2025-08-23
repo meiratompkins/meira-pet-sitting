@@ -3011,23 +3011,23 @@ async function sendEmails(event) {
     }
     
     // Collect form data
-    const formData = new FormData(form);
+    const formDataCollection = new FormData(form);
     const templateParams = {
-      client_name: formData.get('client_name'),
-      client_email: formData.get('client_email'),
-      client_phone: formData.get('client_phone'),
-      client_location: formData.get('client_location'),
-      client_address: formData.get('client_address'),
-      pet_names: formData.get('pet_names'),
-      medical_history: formData.get('medical_history'),
-      vet_info: formData.get('vet_info'),
-      feeding_routine: formData.get('feeding_routine'),
-      exercise_routine: formData.get('exercise_routine'),
-      special_notes: formData.get('special_notes'),
-      service_days: formData.get('service_days'),
-      preferred_time: formData.get('preferred_time'),
-      time_flexibility: formData.get('time_flexibility'),
-      additional_notes: formData.get('additional_notes')
+      client_name: formDataCollection.get('client_name'),
+      client_email: formDataCollection.get('client_email'),
+      client_phone: formDataCollection.get('client_phone'),
+      client_location: formDataCollection.get('client_location'),
+      client_address: formDataCollection.get('client_address'),
+      pet_names: formDataCollection.get('pet_names'),
+      medical_history: formDataCollection.get('medical_history'),
+      vet_info: formDataCollection.get('vet_info'),
+      feeding_routine: formDataCollection.get('feeding_routine'),
+      exercise_routine: formDataCollection.get('exercise_routine'),
+      special_notes: formDataCollection.get('special_notes'),
+      service_days: formDataCollection.get('service_days'),
+      preferred_time: formDataCollection.get('preferred_time'),
+      time_flexibility: formDataCollection.get('time_flexibility'),
+      additional_notes: formDataCollection.get('additional_notes')
     };
     
     // Handle file attachments
@@ -3069,8 +3069,8 @@ async function sendEmails(event) {
     console.log(`➕ Added pet_photos_info: ${templateParams.pet_photos_info}`);
     
     console.log('📋 Form fields before sending:');
-    const formData = new FormData(form);
-    for (let [key, value] of formData.entries()) {
+    const formDataDebug = new FormData(form);
+    for (let [key, value] of formDataDebug.entries()) {
       if (key === 'pet_photos') {
         console.log(`  ${key}: ${value instanceof File ? `${value.name} (${value.size} bytes)` : value}`);
       } else {
