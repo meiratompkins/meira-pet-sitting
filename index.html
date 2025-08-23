@@ -42,6 +42,7 @@
 https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
   
   <!-- Structured Data for SEO -->
@@ -1952,37 +1953,9 @@ footer::before {
       <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
       <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
-        <form id="pet-consultation-form" action="https://formsubmit.co/contact@meiratompkins.com" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
+        <form id="pet-consultation-form" style="display: grid; gap: 20px;" onsubmit="sendEmails(event)">
           
-          <!-- FormSubmit.co Configuration -->
-          <input type="hidden" name="_subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
-          <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
-          <input type="hidden" name="_replyto" id="_replyto" value="">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          
-          <!-- Client Autoresponse Configuration -->
-          <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! 🐾
-
-Hi there!
-
-I've received your information and I'm excited to learn about your furry family member! 
-
-📋 What happens next:
-• I'll review your pet's details within 24 hours
-• I'll reach out to schedule your FREE 30-minute consultation
-• We'll go over everything in person!
-
-📷 Pet Photos: If you uploaded photos, they've been safely received! I'll review them before our consultation.
-
-💬 Questions? Text me anytime at (978) 846-9699
-
-Thank you for trusting me with your precious pet! 💕
-
-— Meira & Gus 🐱
-
-Meira Pet Sitting
-📧 contact@meiratompkins.com">
+          <!-- EmailJS will handle form submission -->
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -2972,25 +2945,59 @@ window.nextScrapbookSlide = function() {
   }
 });
 
-// Function to update subject line with client name and set reply-to email before form submission
-function updateSubjectWithName() {
-  const nameField = document.querySelector('input[name="1. Your Name"]');
-  const emailField = document.querySelector('input[name="2. Email Address"]');
-  const subjectField = document.querySelector('input[name="_subject"]');
-  const replyToField = document.querySelector('input[name="_replyto"]');
+// Initialize EmailJS
+emailjs.init('PrGCTp9t_LweTGpR-');
+
+// Function to send emails using EmailJS
+async function sendEmails(event) {
+  event.preventDefault();
   
-  // Update subject line with client name (this goes to admin/you)
-  if (nameField && nameField.value.trim() && subjectField) {
-    const clientName = nameField.value.trim();
-    subjectField.value = `🐾 NEW CLIENT: ${clientName} - Pet Consultation Request (Photos Included)`;
+  const form = event.target;
+  const submitButton = form.querySelector('button[type="submit"]');
+  
+  // Show loading state
+  const originalText = submitButton.innerHTML;
+  submitButton.innerHTML = '🐾 Sending...';
+  submitButton.disabled = true;
+  
+  try {
+    // Collect form data
+    const formData = new FormData(form);
+    const templateParams = {
+      client_name: formData.get('1. Your Name'),
+      client_email: formData.get('2. Email Address'),
+      client_phone: formData.get('3. Phone Number'),
+      client_location: formData.get('4. What town are you located in?'),
+      client_address: formData.get('5. Your Address'),
+      pet_names: formData.get('6. Pet Names & Ages'),
+      medical_history: formData.get('7. Medical History & Current Medications'),
+      vet_info: formData.get('8. Veterinarian Information'),
+      feeding_routine: formData.get('9. Feeding Routine'),
+      exercise_routine: formData.get('10. Play & Exercise Routine'),
+      special_notes: formData.get('11. Quirks & Special Notes'),
+      service_days: formData.get('12. What days do you need visits?'),
+      preferred_time: formData.get('13. Preferred Time'),
+      time_flexibility: formData.get('14. Time Flexibility'),
+      additional_notes: formData.get('15. Anything Else?')
+    };
+    
+    // Send admin email
+    await emailjs.send('service_6htvf0p', 'template_vx4isgb', templateParams);
+    
+    // Send client autoresponse
+    await emailjs.send('service_6htvf0p', 'template_ofhw96d', templateParams);
+    
+    // Redirect to thank you page
+    window.location.href = 'https://meirapetsitting.com/thanks.html';
+    
+  } catch (error) {
+    console.error('Error sending emails:', error);
+    alert('Sorry, there was an error sending your request. Please try again or email me directly at contact@meiratompkins.com');
+    
+    // Reset button
+    submitButton.innerHTML = originalText;
+    submitButton.disabled = false;
   }
-  
-  // Set reply-to field with client's email
-  if (emailField && emailField.value.trim() && replyToField) {
-    replyToField.value = emailField.value.trim();
-  }
-  
-  return true; // Allow form submission to continue
 }
 </script>
 </body>
