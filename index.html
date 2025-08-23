@@ -2968,17 +2968,17 @@ async function sendEmails(event) {
       client_email: formData.get('2. Email Address'),
       client_phone: formData.get('3. Phone Number'),
       client_location: formData.get('4. What town are you located in?'),
-      client_address: formData.get('5. Your Address'),
+      client_address: formData.get('5. Your Address (where pet visits will take place)'),
       pet_names: formData.get('6. Pet Names & Ages'),
-      medical_history: formData.get('7. Medical History & Current Medications'),
-      vet_info: formData.get('8. Veterinarian Information'),
-      feeding_routine: formData.get('9. Feeding Routine'),
-      exercise_routine: formData.get('10. Play & Exercise Routine'),
-      special_notes: formData.get('11. Quirks & Special Notes'),
-      service_days: formData.get('12. What days do you need visits?'),
-      preferred_time: formData.get('13. Preferred Time'),
-      time_flexibility: formData.get('14. Time Flexibility'),
-      additional_notes: formData.get('15. Anything Else?')
+      medical_history: formData.get('8. Medical History & Current Medications'),
+      vet_info: formData.get('9. Veterinarian Information'),
+      feeding_routine: formData.get('10. What is your pet\'s feeding routine?'),
+      exercise_routine: formData.get('11. What is your pet\'s play & exercise routine?'),
+      special_notes: formData.get('12. What quirks or special things should I know about your pet?'),
+      service_days: formData.get('13. What days do you need visits?'),
+      preferred_time: formData.get('14. What time do you prefer visits?'),
+      time_flexibility: formData.get('15. How flexible are you with timing?'),
+      additional_notes: formData.get('16. Anything else I should know?')
     };
     
     // Handle file attachments
