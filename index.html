@@ -2982,18 +2982,18 @@ async function sendEmails(event) {
     };
     
     console.log('Form data being sent:', templateParams);
-    console.log('Service ID:', 'service_9z6mrkt');
+    console.log('Service ID:', 'service_p2ct36r');
     console.log('Admin Template:', 'template_vx4isgb');
     console.log('Client Template:', 'template_ofhw96d');
     
     // Send admin email first
     console.log('Sending admin email...');
-    const adminResult = await emailjs.send('service_9z6mrkt', 'template_vx4isgb', templateParams);
+    const adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', templateParams);
     console.log('Admin email sent successfully:', adminResult);
     
     // Send client autoresponse
     console.log('Sending client email...');
-    const clientResult = await emailjs.send('service_9z6mrkt', 'template_ofhw96d', templateParams);
+    const clientResult = await emailjs.send('service_p2ct36r', 'template_ofhw96d', templateParams);
     console.log('Client email sent successfully:', clientResult);
     
     // Redirect to thank you page
