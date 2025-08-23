@@ -1952,18 +1952,20 @@ footer::before {
       <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
       <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
-        <form id="pet-consultation-form" action="https://formspree.io/f/mwpqjqqg" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
+        <form id="pet-consultation-form" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
           
-          <!-- Hidden Formspree Configuration -->
-          <input type="hidden" name="_subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
-          <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
-          <input type="hidden" name="_replyto" id="_replyto" value="">
-          <input type="hidden" name="_cc" id="cc-field" value="">
-          <input type="hidden" name="_format" value="plain">
-
-          <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! 🐾
-
-Hi there!
+          <!-- Web3Forms Configuration -->
+          <input type="hidden" name="access_key" value="c83b58c9-804e-4bf2-a71e-e15217404231">
+          <input type="hidden" name="subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
+          <input type="hidden" name="redirect" value="https://meirapetsitting.com/thanks.html">
+          <input type="hidden" name="replyto" id="replyto" value="">
+          <input type="hidden" name="from_name" value="Meira Pet Sitting Website">
+          <input type="hidden" name="to_email" value="contact@meiratompkins.com">
+          
+          <!-- Client Autoresponse Configuration -->
+          <input type="hidden" name="autoresponse" value="yes">
+          <input type="hidden" name="autoresponse_subject" value="Thank you for your pet consultation request! 🐾">
+          <input type="hidden" name="autoresponse_message" value="Hi there!
 
 I've received your information and I'm excited to learn about your furry family member! 
 
@@ -1982,7 +1984,6 @@ Thank you for trusting me with your precious pet! 💕
 
 Meira Pet Sitting
 📧 contact@meiratompkins.com">
-          <input type="hidden" name="_autoresponse.subject" value="Thank you for your pet consultation request! 🐾">
           
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
@@ -2870,38 +2871,7 @@ window.nextScrapbookSlide = function() {
     }
   }, 4000);
   
-  // Form submission handler to copy email address to CC field
-  const petForm = document.getElementById('pet-consultation-form');
-  if (petForm) {
-    // Set up form validation and CC field population on submit
-    petForm.addEventListener('submit', function(e) {
-      const emailField = document.querySelector('input[name="2. Email Address"]');
-      const ccField = document.getElementById('cc-field');
-      
-      console.log('Form submitting...', emailField?.value);
-      
-      if (emailField && emailField.value && emailField.value.trim()) {
-        ccField.value = emailField.value.trim();
-        console.log('CC field set to:', ccField.value);
-      } else {
-        console.warn('No email found to set CC field');
-      }
-      
-      // Let the form submit naturally
-      return true;
-    });
-    
-    // Also update CC field when email field changes (backup)
-    const emailField = document.querySelector('input[name="2. Email Address"]');
-    if (emailField) {
-      emailField.addEventListener('input', function() {
-        const ccField = document.getElementById('cc-field');
-        if (ccField && this.value) {
-          ccField.value = this.value.trim();
-        }
-      });
-    }
-  }
+  // Web3Forms handles autoresponse automatically - no CC field needed
   
   // Consultation section paw trail
   const consultationSection = document.querySelector('#booking');
@@ -3007,8 +2977,8 @@ window.nextScrapbookSlide = function() {
 function updateSubjectWithName() {
   const nameField = document.querySelector('input[name="1. Your Name"]');
   const emailField = document.querySelector('input[name="2. Email Address"]');
-  const subjectField = document.querySelector('input[name="_subject"]');
-  const replyToField = document.querySelector('input[name="_replyto"]');
+  const subjectField = document.querySelector('input[name="subject"]');
+  const replyToField = document.querySelector('input[name="replyto"]');
   
   // Update subject line with client name (this goes to admin/you)
   if (nameField && nameField.value.trim() && subjectField) {
