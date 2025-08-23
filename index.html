@@ -3002,9 +3002,9 @@ async function sendEmails(event) {
   
   try {
     // Final validation: Check file count before submission
-    const fileInput = form.querySelector('input[name="pet_photos"]');
-    if (fileInput && fileInput.files && fileInput.files.length > 5) {
-      alert('⚠️ Please select up to 5 photos only. You have selected ' + fileInput.files.length + ' photos.');
+    const photoInput = form.querySelector('input[name="pet_photos"]');
+    if (photoInput && photoInput.files && photoInput.files.length > 5) {
+      alert('⚠️ Please select up to 5 photos only. You have selected ' + photoInput.files.length + ' photos.');
       submitButton.innerHTML = originalText;
       submitButton.disabled = false;
       return;
