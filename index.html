@@ -1963,23 +1963,23 @@ footer::before {
             <div style="display: grid; gap: 15px;">
                             <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Name *</label>
-                <input type="text" name="1. Your Name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="text" name="client_name" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Email *</label>
-                <input type="email" name="2. Email Address" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="email" name="client_email" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Phone Number *</label>
-                <input type="tel" name="3. Phone Number" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="tel" name="client_phone" required style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">What town are you located in? *</label>
-                <input type="text" name="4. What town are you located in?" required placeholder="e.g., West Hartford, CT" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <input type="text" name="client_location" required placeholder="e.g., West Hartford, CT" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Your Address *</label>
-                <textarea name="5. Your Address (where pet visits will take place)" required placeholder="Street address where pet visits will take place" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+                <textarea name="client_address" required placeholder="Street address where pet visits will take place" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
                 <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">This helps me plan my route and confirm I can service your area.</p>
               </div>
             </div>
@@ -1991,12 +1991,12 @@ footer::before {
             <div style="display: grid; gap: 15px;">
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Names & Ages *</label>
-                <textarea name="6. Pet Names & Ages" required placeholder="e.g., Bella (3 years old cat), Max (5 years old golden retriever)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                <textarea name="pet_names" required placeholder="e.g., Bella (3 years old cat), Max (5 years old golden retriever)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Photos (Optional - up to 5 photos)</label>
                 <input type="file" name="pet_photos" multiple accept="image/*" onchange="validateFileCount(this)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
-                <input type="hidden" name="7. Pet Photos" value="[Files uploaded - see attachments]">
+                <input type="hidden" name="pet_photos_text" value="[Files uploaded - see attachments]">
                 <div id="file-count-error" style="color: #ff4444; font-size: 14px; margin-top: 5px; display: none;">
                   ⚠️ Please select up to 5 photos only. You selected <span id="selected-count"></span> photos.
                 </div>
@@ -2014,11 +2014,11 @@ footer::before {
             <div style="display: grid; gap: 15px;">
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Medical History & Current Medications</label>
-                <textarea name="8. Medical History & Current Medications" placeholder="Any health conditions, medications, allergies, or special medical needs..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                <textarea name="medical_history" placeholder="Any health conditions, medications, allergies, or special medical needs..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Veterinarian Information</label>
-                <textarea name="9. Veterinarian Information" placeholder="Vet name, clinic, phone number, any recent visits..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+                <textarea name="vet_info" placeholder="Vet name, clinic, phone number, any recent visits..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
               </div>
             </div>
           </div>
@@ -2029,15 +2029,15 @@ footer::before {
             <div style="display: grid; gap: 15px;">
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Feeding Routine *</label>
-                <textarea name="10. What is your pet's feeding routine?" required placeholder="What food, how much, how often, feeding times, treats, special instructions..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                <textarea name="feeding_routine" required placeholder="What food, how much, how often, feeding times, treats, special instructions..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Play & Exercise Routine</label>
-                <textarea name="11. What is your pet's play & exercise routine?" placeholder="Favorite toys, games, exercise needs, walk duration/frequency..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                <textarea name="exercise_routine" placeholder="Favorite toys, games, exercise needs, walk duration/frequency..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Quirks & Special Notes</label>
-                <textarea name="12. What quirks or special things should I know about your pet?" placeholder="Personality traits, likes/dislikes, fears, habits, anything that helps me understand your pet better..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
+                <textarea name="special_notes" placeholder="Personality traits, likes/dislikes, fears, habits, anything that helps me understand your pet better..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
             </div>
           </div>
@@ -2048,16 +2048,16 @@ footer::before {
             <div style="display: grid; gap: 15px;">
               <div>
                 <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">What days do you need visits? *</label>
-                <textarea name="13. What days do you need visits?" required placeholder="e.g., Dec 20-25, every weekday, weekends only, specific dates..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
+                <textarea name="service_days" required placeholder="e.g., Dec 20-25, every weekday, weekends only, specific dates..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 60px; resize: vertical;"></textarea>
               </div>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div>
                   <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Preferred Time</label>
-                  <input type="text" name="14. What time do you prefer visits?" placeholder="e.g., 2-4pm, morning, flexible" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                  <input type="text" name="preferred_time" placeholder="e.g., 2-4pm, morning, flexible" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
                 </div>
                 <div>
                   <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Time Flexibility</label>
-                  <select name="15. How flexible are you with timing?" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                  <select name="time_flexibility" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
                     <option value="">Select flexibility</option>
                     <option value="very_flexible">Very flexible</option>
                     <option value="somewhat_flexible">Somewhat flexible</option>
@@ -2071,7 +2071,7 @@ footer::before {
           <!-- Additional Notes -->
           <div style="background: #FFFACD; padding: 20px; border-radius: 15px; border: 2px dashed #DAA520;">
             <h3 style="color: #B8860B; margin: 0 0 15px 0; font-size: 20px;">💭 Anything Else?</h3>
-            <textarea name="16. Anything else I should know?" placeholder="Anything else you'd like me to know? Questions about my services? Special requests?" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 100px; resize: vertical;"></textarea>
+            <textarea name="additional_notes" placeholder="Anything else you'd like me to know? Questions about my services? Special requests?" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 100px; resize: vertical;"></textarea>
           </div>
 
           <!-- Submit Button -->
@@ -3013,21 +3013,21 @@ async function sendEmails(event) {
     // Collect form data
     const formData = new FormData(form);
     const templateParams = {
-      client_name: formData.get('1. Your Name'),
-      client_email: formData.get('2. Email Address'),
-      client_phone: formData.get('3. Phone Number'),
-      client_location: formData.get('4. What town are you located in?'),
-      client_address: formData.get('5. Your Address (where pet visits will take place)'),
-      pet_names: formData.get('6. Pet Names & Ages'),
-      medical_history: formData.get('8. Medical History & Current Medications'),
-      vet_info: formData.get('9. Veterinarian Information'),
-      feeding_routine: formData.get('10. What is your pet\'s feeding routine?'),
-      exercise_routine: formData.get('11. What is your pet\'s play & exercise routine?'),
-      special_notes: formData.get('12. What quirks or special things should I know about your pet?'),
-      service_days: formData.get('13. What days do you need visits?'),
-      preferred_time: formData.get('14. What time do you prefer visits?'),
-      time_flexibility: formData.get('15. How flexible are you with timing?'),
-      additional_notes: formData.get('16. Anything else I should know?')
+      client_name: formData.get('client_name'),
+      client_email: formData.get('client_email'),
+      client_phone: formData.get('client_phone'),
+      client_location: formData.get('client_location'),
+      client_address: formData.get('client_address'),
+      pet_names: formData.get('pet_names'),
+      medical_history: formData.get('medical_history'),
+      vet_info: formData.get('vet_info'),
+      feeding_routine: formData.get('feeding_routine'),
+      exercise_routine: formData.get('exercise_routine'),
+      special_notes: formData.get('special_notes'),
+      service_days: formData.get('service_days'),
+      preferred_time: formData.get('preferred_time'),
+      time_flexibility: formData.get('time_flexibility'),
+      additional_notes: formData.get('additional_notes')
     };
     
     // Handle file attachments
@@ -3060,57 +3060,31 @@ async function sendEmails(event) {
     console.log('Sending admin email...');
     console.log('Template params:', JSON.stringify(templateParams, null, 2));
     
-    let adminResult;
-    if (templateParams.hasAttachments) {
-      console.log('🔗 Sending with attachments using sendForm...');
-      
-      // Add only the pet_photos_info as a hidden field since sendForm uses form field names directly
-      const tempInput = document.createElement('input');
-      tempInput.type = 'hidden';
-      tempInput.name = 'pet_photos_info';
-      tempInput.value = templateParams.pet_photos_info || '';
-      form.appendChild(tempInput);
-      console.log(`➕ Added pet_photos_info: ${templateParams.pet_photos_info}`);
-      
-      console.log('📋 Form fields before sending:');
-      const formData = new FormData(form);
-      for (let [key, value] of formData.entries()) {
-        if (key === 'pet_photos') {
-          console.log(`  ${key}: ${value instanceof File ? `${value.name} (${value.size} bytes)` : value}`);
-        } else {
-          console.log(`  ${key}: ${value}`);
-        }
+    // Add pet_photos_info as hidden field for template
+    const tempInput = document.createElement('input');
+    tempInput.type = 'hidden';
+    tempInput.name = 'pet_photos_info';
+    tempInput.value = templateParams.pet_photos_info || '';
+    form.appendChild(tempInput);
+    console.log(`➕ Added pet_photos_info: ${templateParams.pet_photos_info}`);
+    
+    console.log('📋 Form fields before sending:');
+    const formData = new FormData(form);
+    for (let [key, value] of formData.entries()) {
+      if (key === 'pet_photos') {
+        console.log(`  ${key}: ${value instanceof File ? `${value.name} (${value.size} bytes)` : value}`);
+      } else {
+        console.log(`  ${key}: ${value}`);
       }
-      
-      // Try sendForm for attachments (uses original form field names)
-      adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
-      console.log('✅ sendForm completed');
-      
-      // Remove temporary hidden input after sending
-      form.removeChild(tempInput);
-    } else {
-      console.log('📤 Sending without attachments using send...');
-      // Use regular send for text-only - map to form field names for consistency
-      const formFieldParams = {
-        '1. Your Name': templateParams.client_name,
-        '2. Email Address': templateParams.client_email,
-        '3. Phone Number': templateParams.client_phone,
-        '4. What town are you located in?': templateParams.client_location,
-        '5. Your Address (where pet visits will take place)': templateParams.client_address,
-        '6. Pet Names & Ages': templateParams.pet_names,
-        '8. Medical History & Current Medications': templateParams.medical_history,
-        '9. Veterinarian Information': templateParams.vet_info,
-        '10. What is your pet\'s feeding routine?': templateParams.feeding_routine,
-        '11. What is your pet\'s play & exercise routine?': templateParams.exercise_routine,
-        '12. What quirks or special things should I know about your pet?': templateParams.special_notes,
-        '13. What days do you need visits?': templateParams.service_days,
-        '14. What time do you prefer visits?': templateParams.preferred_time,
-        '15. How flexible are you with timing?': templateParams.time_flexibility,
-        '16. Anything else I should know?': templateParams.additional_notes,
-        'pet_photos_info': templateParams.pet_photos_info
-      };
-      adminResult = await emailjs.send('service_p2ct36r', 'template_vx4isgb', formFieldParams);
     }
+    
+    // Use sendForm for everything now (works with attachments and template-friendly field names)
+    console.log('📤 Sending admin email using sendForm...');
+    const adminResult = await emailjs.sendForm('service_p2ct36r', 'template_vx4isgb', form);
+    console.log('✅ sendForm completed');
+    
+    // Remove temporary hidden input after sending
+    form.removeChild(tempInput);
     console.log('Admin email sent successfully:', adminResult);
     
     // Send client autoresponse (no attachments needed)
