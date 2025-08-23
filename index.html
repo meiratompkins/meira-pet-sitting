@@ -1952,20 +1952,19 @@ footer::before {
       <p style="font-size: 18px; line-height: 1.6; margin-bottom: 40px; color: #666;">Share your pet's details and I'll reach out to schedule a free 30‑minute consultation where we'll go over everything in person!</p>
       
       <div class="panel" style="background: white; border: 3px solid var(--cta); box-shadow: 0 8px 0 rgba(0,0,0,0.1); padding: 40px; text-align: left;">
-        <form id="pet-consultation-form" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
+        <form id="pet-consultation-form" action="https://formsubmit.co/contact@meiratompkins.com" method="POST" enctype="multipart/form-data" style="display: grid; gap: 20px;" onsubmit="updateSubjectWithName()">
           
-          <!-- Web3Forms Configuration -->
-          <input type="hidden" name="access_key" value="c83b58c9-804e-4bf2-a71e-e15217404231">
-          <input type="hidden" name="subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
-          <input type="hidden" name="redirect" value="https://meirapetsitting.com/thanks.html">
-          <input type="hidden" name="replyto" id="replyto" value="">
-          <input type="hidden" name="from_name" value="Meira Pet Sitting Website">
-          <input type="hidden" name="to_email" value="contact@meiratompkins.com">
+          <!-- FormSubmit.co Configuration -->
+          <input type="hidden" name="_subject" value="🐾 NEW CLIENT - Pet Consultation Request (Photos Included)">
+          <input type="hidden" name="_next" value="https://meirapetsitting.com/thanks.html">
+          <input type="hidden" name="_replyto" id="_replyto" value="">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           
           <!-- Client Autoresponse Configuration -->
-          <input type="hidden" name="autoresponse" value="yes">
-          <input type="hidden" name="autoresponse_subject" value="Thank you for your pet consultation request! 🐾">
-          <input type="hidden" name="autoresponse_message" value="Hi there!
+          <input type="hidden" name="_autoresponse" value="Thank you for your pet consultation request! 🐾
+
+Hi there!
 
 I've received your information and I'm excited to learn about your furry family member! 
 
@@ -2977,8 +2976,8 @@ window.nextScrapbookSlide = function() {
 function updateSubjectWithName() {
   const nameField = document.querySelector('input[name="1. Your Name"]');
   const emailField = document.querySelector('input[name="2. Email Address"]');
-  const subjectField = document.querySelector('input[name="subject"]');
-  const replyToField = document.querySelector('input[name="replyto"]');
+  const subjectField = document.querySelector('input[name="_subject"]');
+  const replyToField = document.querySelector('input[name="_replyto"]');
   
   // Update subject line with client name (this goes to admin/you)
   if (nameField && nameField.value.trim() && subjectField) {
