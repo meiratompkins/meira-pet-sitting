@@ -1994,9 +1994,15 @@ footer::before {
                 <textarea name="6. Pet Names & Ages" required placeholder="e.g., Bella (3 years old cat), Max (5 years old golden retriever)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical;"></textarea>
               </div>
               <div>
-                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Photos (Optional)</label>
-                <input type="file" name="pet_photos" multiple accept="image/*" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 5px; color: var(--ink);">Pet Photos (Optional - up to 5 photos)</label>
+                <input type="file" name="pet_photos" multiple accept="image/*" onchange="validateFileCount(this)" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
                 <input type="hidden" name="7. Pet Photos" value="[Files uploaded - see attachments]">
+                <div id="file-count-error" style="color: #ff4444; font-size: 14px; margin-top: 5px; display: none;">
+                  ⚠️ Please select up to 5 photos only. You selected <span id="selected-count"></span> photos.
+                </div>
+                <div id="file-count-info" style="color: #666; font-size: 14px; margin-top: 5px; display: none;">
+                  📷 <span id="file-info"></span>
+                </div>
                 <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">Upload photos of your pets so I can get to know them!</p>
               </div>
             </div>
@@ -2948,6 +2954,40 @@ window.nextScrapbookSlide = function() {
 // Initialize EmailJS
 emailjs.init('PrGCTp9t_LweTGpR-');
 
+// Function to validate file count (max 5 photos)
+function validateFileCount(input) {
+  const maxFiles = 5;
+  const files = input.files;
+  const errorDiv = document.getElementById('file-count-error');
+  const infoDiv = document.getElementById('file-count-info');
+  const selectedCountSpan = document.getElementById('selected-count');
+  const fileInfoSpan = document.getElementById('file-info');
+  
+  if (files.length > maxFiles) {
+    // Too many files selected
+    selectedCountSpan.textContent = files.length;
+    errorDiv.style.display = 'block';
+    infoDiv.style.display = 'none';
+    input.style.borderColor = '#ff4444';
+    
+    // Clear the file input
+    input.value = '';
+  } else if (files.length > 0) {
+    // Valid number of files
+    errorDiv.style.display = 'none';
+    infoDiv.style.display = 'block';
+    input.style.borderColor = '#ddd';
+    
+    const fileNames = Array.from(files).map(f => f.name).join(', ');
+    fileInfoSpan.textContent = `${files.length} photo${files.length > 1 ? 's' : ''} selected: ${fileNames}`;
+  } else {
+    // No files selected
+    errorDiv.style.display = 'none';
+    infoDiv.style.display = 'none';
+    input.style.borderColor = '#ddd';
+  }
+}
+
 // Function to send emails using EmailJS
 async function sendEmails(event) {
   event.preventDefault();
@@ -2961,6 +3001,15 @@ async function sendEmails(event) {
   submitButton.disabled = true;
   
   try {
+    // Final validation: Check file count before submission
+    const fileInput = form.querySelector('input[name="pet_photos"]');
+    if (fileInput && fileInput.files && fileInput.files.length > 5) {
+      alert('⚠️ Please select up to 5 photos only. You have selected ' + fileInput.files.length + ' photos.');
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+      return;
+    }
+    
     // Collect form data
     const formData = new FormData(form);
     const templateParams = {
