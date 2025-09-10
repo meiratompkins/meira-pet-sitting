@@ -551,19 +551,19 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
 
   
   .hero p {
-    margin-bottom: 30px !important;
+    margin: 15px 0 !important;
     max-width: 600px !important;
   }
   
 
   
   .hero h1 {
-    font-size: 32px;
+    font-size: clamp(28px, 6vw, 48px);
     line-height: 1.2;
   }
   
   .hero p {
-    font-size: 16px;
+    font-size: clamp(16px, 2.5vw, 22px);
   }
   
   .btn {
@@ -768,11 +768,11 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
 }
   
   .hero h1 {
-    font-size: 42px;
+    font-size: clamp(36px, 7vw, 60px);
   }
   
   .hero p {
-    font-size: 13px !important;
+    font-size: clamp(14px, 2.2vw, 18px) !important;
   }
   
   .badges {
@@ -823,7 +823,8 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
     display: none !important;
   }
 }
-  
+
+@media (max-width: 768px) {
   .grid[style*="repeat(4, 1fr)"] {
     display: flex !important;
     flex-direction: column !important;
@@ -980,7 +981,7 @@ a:hover{color:#FF7FA6; transform:translateY(-2px)}
 
 /* Meet Meira & Gus Section */
 .meet-section {
-  background: linear-gradient(135deg, #fff 0%, #fff9f0 100%);
+  background: linear-gradient(135deg, #fff 0%, #fff9f0 100%) !important;
 }
 
 .meet-title {
@@ -1347,7 +1348,7 @@ body{
 
 .hero{min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:60px 20px 60px 20px; position:relative}
 .lead{font-size:clamp(16px,2.5vw,20px); margin:15px 0 15px 0; animation:fadeInUp 1s ease-out 0.2s both; max-width: 600px; line-height: 1.4}
-.badges{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:20px 0 15px 0; animation:fadeInUp 1s ease-out 0.4s both}
+.badges{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:15px 0; animation:fadeInUp 1s ease-out 0.4s both}
 .badge{background:#fff; border-radius:999px; padding:8px 14px; box-shadow:0 4px 0 rgba(0,0,0,.12); transition:all 0.3s ease}
 .badge:hover{transform:scale(1.05); box-shadow:0 6px 0 rgba(0,0,0,.15)}
 
@@ -1747,7 +1748,7 @@ footer::before {
   </div>
 </header>
 
-<section class="section meet-section" id="about">
+<section class="section meet-section" id="about" style="background: linear-gradient(135deg, #fff 0%, #fff9f0 100%) !important;">
   <div class="container">
     <h2 class="meet-title">Meet Meira &amp; Gus</h2>
     <div class="meet-content">
