@@ -49,6 +49,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LdcJekrAAAAAASRaVIhGBUonAztVLVkqEy6E57y" async defer></script>
   <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
   
   <!-- Structured Data for SEO -->
@@ -1977,6 +1978,9 @@ footer::before {
           
           <!-- EmailJS will handle form submission -->
           
+          <!-- Honeypot field for spam protection (hidden from users) -->
+          <input type="text" name="honeypot" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" tabindex="-1" autocomplete="off">
+          
           <!-- Your Information -->
           <div style="background: #FFF9F1; padding: 20px; border-radius: 15px; border: 2px dashed var(--cta2);">
             <h3 style="color: var(--cta2); margin: 0 0 15px 0; font-size: 20px;">👋 About You</h3>
@@ -3058,12 +3062,24 @@ async function sendEmails(event) {
   const form = event.target;
   const submitButton = form.querySelector('button[type="submit"]');
   
+  // Honeypot spam protection
+  const honeypot = form.querySelector('input[name="honeypot"]');
+  if (honeypot && honeypot.value !== '') {
+    console.log('🚫 Spam detected via honeypot');
+    // Silently fail for bots
+    return false;
+  }
+  
   // Show loading state
   const originalText = submitButton.innerHTML;
   submitButton.innerHTML = '🐾 Sending...';
   submitButton.disabled = true;
   
   try {
+    // Execute reCAPTCHA v3 (replace 'YOUR_SITE_KEY' with your actual site key)
+    const recaptchaToken = await grecaptcha.execute('6LdcJekrAAAAAASRaVIhGBUonAztVLVkqEy6E57y', {action: 'submit'});
+    console.log('✅ reCAPTCHA token received');
+    
     // Final validation: Check file count before submission
     const photoInput = form.querySelector('input[name="pet_photos"]');
     if (photoInput && photoInput.files && photoInput.files.length > 5) {
@@ -3090,7 +3106,8 @@ async function sendEmails(event) {
       service_days: formDataCollection.get('service_days'),
       preferred_time: formDataCollection.get('preferred_time'),
       time_flexibility: formDataCollection.get('time_flexibility'),
-      additional_notes: formDataCollection.get('additional_notes')
+      additional_notes: formDataCollection.get('additional_notes'),
+      recaptcha_token: recaptchaToken
     };
     
     // Handle file attachments
@@ -3163,7 +3180,17 @@ async function sendEmails(event) {
     console.error('Error message:', error.message);
     console.error('Error status:', error.status);
     console.error('Error text:', error.text);
-    alert(`Error details: ${error.message || error.text || 'Unknown error'}. Please try again or email me directly at contact@meiratompkins.com`);
+    
+    let errorMessage = 'Unknown error';
+    if (error.message && error.message.includes('recaptcha')) {
+      errorMessage = 'reCAPTCHA verification failed. Please refresh the page and try again.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    } else if (error.text) {
+      errorMessage = error.text;
+    }
+    
+    alert(`Error: ${errorMessage}. Please try again or email me directly at contact@meiratompkins.com`);
     
     // Reset button
     submitButton.innerHTML = originalText;
