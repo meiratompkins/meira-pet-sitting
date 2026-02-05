@@ -1,0 +1,3 @@
+[submodule "meira-ultralite-site/meira-ultralite-site"]
+	path = meira-ultralite-site/meira-ultralite-site
+	url = https://github.com/meiratompkins/meira-pet-sitting.git
