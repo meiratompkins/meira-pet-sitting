@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meira Pet Sitting – West Hartford</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#FF7FA6; --cream:#FFF6F8; --sage:#B8DFC6; --sky:#BFE8FF; --ink:#2E2E2E;
+}
+*{box-sizing:border-box}
+body{margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink); background:var(--cream)}
+a{color:var(--rose); text-decoration:none}
+.container{width:min(1000px,92%); margin:auto}
+.hero{background:linear-gradient(180deg, var(--cream), #ffffff); padding:64px 0}
+.h1{font-family:Poppins, sans-serif; font-weight:700; font-size:clamp(28px,4vw,44px); margin:0 0 12px}
+.lead{font-size:clamp(16px,2.2vw,20px); opacity:.9}
+.btn{display:inline-block; padding:14px 20px; border-radius:12px; background:var(--rose); color:#fff; font-weight:700; margin-top:18px}
+.badges{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+.badge{background:var(--sky); padding:8px 12px; border-radius:999px; font-size:14px}
+.section{padding:56px 0}
+h2{font-family:Poppins, sans-serif; font-size:clamp(22px,3vw,30px); margin:0 0 18px}
+.card{background:#fff; border:1px solid #eee; border-radius:16px; padding:20px}
+.grid{display:grid; gap:18px}
+@media(min-width:800px){ .grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:repeat(3,1fr)} }
+.price{font-size:22px; font-weight:700}
+.kicker{font-weight:700; color:#666; letter-spacing:.04em; text-transform:uppercase; font-size:12px; margin-bottom:6px}
+.list{margin:0; padding-left:18px}
+.footer{padding:36px 0 64px; background:#fff; border-top:1px solid #eee}
+.note{background:var(--sage); padding:10px 12px; border-radius:12px; display:inline-block}
+.paws{font-size:20px}
+.divider{height:12px; background:repeating-linear-gradient(90deg, transparent 0 20px, rgba(0,0,0,.05) 20px 22px)}
+.small{font-size:13px; opacity:.8}
+.center{text-align:center}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="container">
+    <div class="paws">🐾🐾🐾</div>
+    <h1 class="h1">Meira Pet Sitting</h1>
+    <p class="lead">West Hartford’s most loving <strong>cat drop‑ins</strong> & <strong>dog walks</strong>. Photos, texts, and peace of mind—every visit.</p>
+    <a class="btn" href="YOUR-CALENDLY-URL" target="_blank" rel="noopener">Book your free 30‑min consult</a>
+    <div class="badges">
+      <span class="badge">✅ Approved on <strong>Rover</strong></span>
+      <span class="badge">✅ Approved on <strong>Wag</strong></span>
+      <span class="badge">📍 West Hartford (moving in January)</span>
+    </div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<main class="container">
+  <section class="section" id="services">
+    <h2>Services & Pricing</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="kicker">Cats</div>
+        <h3>Drop‑In (30 min)</h3>
+        <p class="price">$28 • 1 pet</p>
+        <ul class="list">
+          <li>At least 5 photos/videos</li>
+          <li>Food, water, litter refresh</li>
+          <li>Playtime + cuddles</li>
+        </ul>
+        <p class="small">+$6/extra pet · +$5 meds · Holiday +$10</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Cats</div>
+        <h3>Drop‑In (60 min)</h3>
+        <p class="price">$45 • 1 pet</p>
+        <ul class="list">
+          <li>At least 5 photos/videos</li>
+          <li>Deep clean + extended play</li>
+          <li>Mail/plants/lights on request</li>
+        </ul>
+        <p class="small">+$6/extra pet · +$5 meds · Holiday +$10</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Dogs</div>
+        <h3>Walks & Drop‑Ins</h3>
+        <p class="price">30 min $30 • 60 min $48</p>
+        <ul class="list">
+          <li>Photos + short summary</li>
+          <li>Strava route link for walks</li>
+          <li>Fresh water + secure lock‑up</li>
+        </ul>
+        <p class="small">+$6/extra pet · Holiday +$10</p>
+      </div>
+    </div>
+    <p class="note">Ask about multi‑visit packages (save on bundles!).</p>
+  </section>
+
+  <section class="section" id="booking">
+    <h2>Book a Free 30‑Minute Consultation</h2>
+    <p>We’ll cover routines, health notes, keys/lockbox, and your pet’s favorite things. After booking, you’ll receive an intake form + confirmation email.</p>
+    <!-- Calendly embed -->
+    <div class="card">
+      <p class="small">Calendar loading? <a href="YOUR-CALENDLY-URL" target="_blank" rel="noopener">Open in a new tab</a>.</p>
+      <div class="center small">[ Calendly / Acuity embed goes here ]</div>
+    </div>
+  </section>
+
+  <section class="section" id="expect">
+    <h2>What to Expect</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Before You Book</h3>
+        <ul class="list">
+          <li>Free 30‑minute consultation to ensure we’re the right fit</li>
+          <li>Share health issues, quirks, routines, and anything special</li>
+          <li>Provide vet + emergency contact</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>During Each Visit</h3>
+        <ul class="list">
+          <li><strong>Drop‑Ins:</strong> at least 5 photos/videos + summary (eats, water, litter/clean‑up, playtime)</li>
+          <li><strong>Dog Walks:</strong> photos + summary + <strong>Strava link</strong> to our route</li>
+          <li>House care as requested (mail, plants, lights)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testimonials">
+    <h2>Happy Pet Parents</h2>
+    <div class="grid grid-2">
+      <div class="card">“Reliable, communicative, and our shy cat LOVES her.” — A.M.</div>
+      <div class="card">“The Strava map after every walk is genius.” — L.R.</div>
+    </div>
+    <p class="small">See more on <a href="ROVER_PROFILE_URL" target="_blank" rel="noopener">Rover</a> and <a href="WAG_PROFILE_URL" target="_blank" rel="noopener">Wag</a>.</p>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About Meira</h2>
+    <div class="card">
+      <p>I’m Meira—cat‑obsessed and dog‑walk enthusiastic. Safety, communication, and happy pets are my whole thing.</p>
+      <p class="small">Service area: West Hartford and nearby. <strong>Moving in January</strong>—new service map soon!</p>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact & Payment</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:hello@meirapetsitting.com">hello@meirapetsitting.com</a><br>
+        Text: <a href="tel:+1YOURNUMBER">+1 (XXX) XXX‑XXXX</a></p>
+        <p>Rover: <a href="ROVER_PROFILE_URL" target="_blank">View profile</a><br>
+        Wag: <a href="WAG_PROFILE_URL" target="_blank">View profile</a></p>
+      </div>
+      <div class="card">
+        <h3>Pay via Venmo</h3>
+        <p><a class="btn" href="https://venmo.com/u/YOURHANDLE" target="_blank" rel="noopener">Pay @YOURHANDLE</a></p>
+        <p class="small">Add your pet’s name + service date in the note. Tips are optional and appreciated!</p>
+        <p class="small">Prefer cash or card? Just let me know during booking.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container center small">© <span id="y"></span> Meira Pet Sitting · All rights reserved · 🐾</div>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
